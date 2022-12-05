@@ -10,11 +10,13 @@
     <div id="app">
         <app-header></app-header>
         <app-content></app-content>
+        <app-footer></app-footer>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
-        //Vue.component('컴퍼넌트 이름', 컴포넌트 내용);
+        // ● 전역 컴포넌트 만들기 (실제론 잘 안씀)
+        // Vue.component('컴퍼넌트 이름', 컴포넌트 내용);
         Vue.component('app-header', {
             template: '<h1>Header이다</h1>'
         });
@@ -24,6 +26,14 @@
         })
         new Vue({
             el: '#app',
+            components: {
+                // ● 지역 컴포넌트 만들기 (생성자 안에)
+                //'컴포넌트 이름(키)': 컴포넌트 내용(값)
+                'app-footer': {
+                    template: '<footer>푸터는 여기</footer>'
+                }
+
+            }
             
         })
     </script>

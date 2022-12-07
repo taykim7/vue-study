@@ -9,7 +9,12 @@
 <body>
     <div id="app">
         <app-header></app-header>
-        <app-content></app-content>
+        <!-- <app-content></app-content> -->
+        <app-footer></app-footer>
+    </div>
+
+    <div id="app2">
+        <app-header></app-header>
         <app-footer></app-footer>
     </div>
 
@@ -21,9 +26,10 @@
             template: '<h1>Header이다</h1>'
         });
 
-        Vue.component('app-content', {
-            template: '<p>뷰마스터합시다</p>'
-        })
+        // Vue.component('app-content', {
+        //     template: '<p>뷰마스터합시다</p>'
+        // })
+
         new Vue({
             el: '#app',
             components: {
@@ -32,10 +38,15 @@
                 'app-footer': {
                     template: '<footer>푸터는 여기</footer>'
                 }
+            },  
+        });
 
-            }
-            
-        })
+        new Vue({
+            el: '#app2',
+            components: {
+                // ● 지역 컴포넌트 등록을 안해서 footer은 안뜸
+            }, 
+        });
     </script>
 </body>
 </html>

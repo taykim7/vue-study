@@ -4,10 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>라우터</title>
 </head>
 <body>
-    <div id="app"></div>
+    <div id="app">
+        
+        <router-link to="/login">로그인으로</router-link>
+        <router-link to="/main">메인으로</router-link>
+
+        <router-view></router-view>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/vue-router@3.5.3/dist/vue-router.js"></script>
@@ -20,21 +26,25 @@
         var MainComponent = {
             template: '<div>이것이 main</div>'
         }
-        
+
         var router = new VueRouter({
             // 페이지의 라우팅 정보 (객체의 배열 형태)
             routes: [
                 {
                     // 페이지의 url
                     path: '/login',
+                    name: 'login',
                     // 해당 url에서 표시될 컴포넌트
                     component: LoginComponent
                 },
                 {
                     path: '/main',
+                    name: 'main',
                     component: MainComponent
                 }
-            ]
+            ],
+            // url에 해쉬값(#) 제거함 = 더 깔끔함
+            mode: 'history'
         });
 
         new Vue({

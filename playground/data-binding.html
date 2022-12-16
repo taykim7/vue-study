@@ -16,6 +16,18 @@
     <div id="app">
         <p v-bind:id="uuid" v-bind:class="name">{{ num }}</p>
         <p>{{ doubleNum }}</p>
+        <div v-if="loading">
+            Loading...
+        </div>
+        <div v-else>
+            test user has been logged in
+        </div>
+        <div v-show="loading">
+            test
+        </div>
+        <!-- TODO: 인풋 박스를 만들고 입력된 값을 p 태그에 출력해보기 -->
+        <input type="text" v-model="message" />
+        <p>Message is: {{ message }}</p>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -26,7 +38,11 @@
                 num: 10,
                 // v-bind:id 를 통해 연결할 id 값
                 uuid: 'abc1234',
-                name: 'text-blue'
+                name: 'text-blue',
+                // if 는 dom을 아예 제거
+                // show 는 display : none 처리
+                loading: true,
+                message: '',
             },
             computed: {
                 doubleNum: function() {

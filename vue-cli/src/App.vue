@@ -1,39 +1,31 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-    
-    <!-- 
-      컴포넌트 명명법 (네이밍 커뮤니케이션) 세 가지
-      (1) <hello-world></hello-world> ← 스타일가이드에서 선호
-      (2) <HelloWorld></HelloWorld>
-      (2) <HelloWorld/> ← 여기선 이걸 사용 중
-     -->
-
+  <!-- template의 하위 루트는 무조건 하나 -->
+  <div>
+    <!-- <app-header v-bind:프롭스 속성 이름="상위 컴포넌트의 데이터 이름"></app-header> -->
+    <app-header v-bind:propsdata="str"
+    v-on:renew="renewStr"></app-header>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import AppHeader from './components/AppHeader.vue';
 export default {
-  // 인스턴스 옵션 속성 or 컴포넌트 옵션 속성
-  name: 'App',
+  data: function() {
+    return {
+      str: '프롭으로 전달한 것'
+    }
+  },
   components: {
-    HelloWorld
-    // 'hello-world' : HelloWorld
+    'app-header' : AppHeader
+  },
+  methods: {
+    renewStr: function() {
+      this.str = '새로갱신!'
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>

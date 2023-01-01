@@ -9,14 +9,21 @@ Vue.config.productionTip = false
 
 new Vue({
   render: h => h(App),
-  // 이렇게 컴포넌트하는 것과 render 과 같음
-  // components: {
-  //   'app': App
-  }
 }).$mount('#app')
 
 // 동일함
-// new Vue({
-//   el: '#app',
-//   render: h => h(App),
-// })
+
+/*
+new Vue({
+  el: '#app',
+  render: h => h(App),
+})
+*/
+
+/*
+new Vue({
+  // 컴포넌트 구성하는 것이 render 로 하는 것과 같음
+  components: {
+    'app': App
+  }).$mount('#app')
+*/

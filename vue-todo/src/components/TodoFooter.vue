@@ -1,13 +1,30 @@
 <template>
-  <div>푸터입니다</div>
+  <div class="clearAllContainer">
+    <span class="clearAllBtn" v-on:click="clearTodo">Clear All</span>
+  </div>
 </template>
 
 <script>
 export default {
-
+  methods: {
+    clearTodo: function() {
+      localStorage.clear();
+    }
+  }
 }
 </script>
 
-<style>
-
+<style scoped>
+.clearAllContainer {
+  width: 8.5rem;
+  height: 30px;
+  line-height: 30px;
+  background-color: rgb(255, 96, 96);
+  border-radius: 15px;
+  margin: 0 auto;
+}
+.clearAllBtn {
+  color: #ffffff;
+  display: block;
+}
 </style>

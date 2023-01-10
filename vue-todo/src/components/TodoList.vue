@@ -1,7 +1,10 @@
 <template>
   <div><ul>
-    <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem" class="shadow">
-      {{ todoItem }}
+    <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem.item" class="shadow">
+      <span class="checkBtn" v-bind:class="{checkBtnCompleted: todoItem.completed}" v-on:click="toggleComplete(todoItem, index)">
+        <i class="fas fa-check"></i>
+      </span>
+      <span v-bind:class="{textCompleted: todoItem.completed}">{{ todoItem.item }}</span>
       <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
         <i class="fas fa-trash-alt"></i>
       </span>
@@ -24,6 +27,12 @@ export default {
       localStorage.removeItem(todoItem); // key와 값이 같아서 가능
       // 배열 메소드로 지우기
       this.todoItems.splice(index, 1);
+    },
+    toggleComplete: function(todoItem, index) {
+      todoItem.completed = !todoItem.completed;
+      // 로컬스토리지의 데이터를 갱신 (api가 없어서... 지우고 다시세팅(할일완료 true 로 표시후))
+      localStorage.removeItem(todoItem.item);
+      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
     }
   },
   created: function() {
@@ -33,7 +42,17 @@ export default {
       for (var i = 0; i < localStorage.length ; i++) {
         //console.log(localStorage.key(i))
         if (localStorage.key(i) !== 'loglevel:webpack-dev-server'){
-          this.todoItems.push(localStorage.key(i));
+          // 기존엔 값만 있었지만 .. 이제 완료 여부도 추가해야함
+          //this.todoItems.push(localStorage.key(i));
+
+          // (1) 저장된 아이템(string으로 만든)
+          //localStorage.getItem(localStorage.key(i));
+
+          // (2) string을 다시 객체로 만들어야함
+          //JSON.parse(localStorage.getItem(localStorage.key(i)));
+
+          // 이걸 넣어
+          this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))))
         }
       }
     }
@@ -42,7 +61,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 ul {
   list-style-type: none;
   padding-left: 0px;

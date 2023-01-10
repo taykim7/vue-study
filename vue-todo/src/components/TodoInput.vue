@@ -17,12 +17,19 @@ export default {
   },
   methods: {
     addTodo: function() {
-      console.log(this.newTodoItem);
-
-      // 저장하는 로직 (localStorage.setItem)
-      localStorage.setItem(this.newTodoItem, this.newTodoItem);
-      // input의 텍스트를 비움
-      this.clearInput();
+      if (this.newTodoItem !== '') {
+        // ○ 저장하는 로직 (localStorage.setItem)
+        //localStorage.setItem(this.newTodoItem, this.newTodoItem);
+        
+        // 이제는 완료 여부도 추가해야함
+        var obj = {completed: false, item: this.newTodoItem};
+        
+        // 자바스크립트 객체를 string 으로 직렬화
+        localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
+        
+        // input의 텍스트를 비움
+        this.clearInput();
+      }
     },
     clearInput: function() {
       this.newTodoItem = '';

@@ -1,6 +1,6 @@
 <template>
   <div><ul>
-    <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem.item" class="shadow">
+    <li v-for="(todoItem, index) in propsdata" v-bind:key="todoItem.item" class="shadow">
       <span class="checkBtn" v-bind:class="{checkBtnCompleted: todoItem.completed}" v-on:click="toggleComplete(todoItem, index)">
         <i class="fas fa-check"></i>
       </span>
@@ -15,11 +15,14 @@
 
 <script>
 export default {
+  /*
   data: function() {
     return {
       todoItems: []
     }
   },
+  */
+  props: ['propsdata'],
   methods: {
     removeTodo: function(todoItem, index) {
       console.log(todoItem, index);
@@ -35,8 +38,9 @@ export default {
       localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
     }
   },
+  /*
   created: function() {
-    console.log('created');
+    console.log('TodoList.vue의 created');
     
     if (localStorage.length > 0) {
       for (var i = 0; i < localStorage.length ; i++) {
@@ -57,6 +61,7 @@ export default {
       }
     }
   }
+  */
 
 }
 </script>

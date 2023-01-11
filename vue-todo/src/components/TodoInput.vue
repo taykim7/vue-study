@@ -22,10 +22,13 @@ export default {
         //localStorage.setItem(this.newTodoItem, this.newTodoItem);
         
         // 이제는 완료 여부도 추가해야함
-        var obj = {completed: false, item: this.newTodoItem};
+        //var obj = {completed: false, item: this.newTodoItem};
         
         // 자바스크립트 객체를 string 으로 직렬화
-        localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
+        //localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
+        
+        //this.$emit('이벤트이름', 인자1, 인자2, ...);
+        this.$emit('addTodoItem', this.newTodoItem);
         
         // input의 텍스트를 비움
         this.clearInput();

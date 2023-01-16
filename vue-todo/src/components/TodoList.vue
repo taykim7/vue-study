@@ -34,10 +34,11 @@ export default {
       //this.todoItems.splice(index, 1);
     },
     toggleComplete: function(todoItem, index) {
-      todoItem.completed = !todoItem.completed;
+      // todoItem.completed = !todoItem.completed;
       // 로컬스토리지의 데이터를 갱신 (api가 없어서... 지우고 다시세팅(할일완료 true 로 표시후))
-      localStorage.removeItem(todoItem.item);
-      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+      // localStorage.removeItem(todoItem.item);
+      // localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+      this.$emit('toggleItem', todoItem, index);
     }
   },
   /*

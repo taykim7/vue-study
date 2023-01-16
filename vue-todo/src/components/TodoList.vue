@@ -26,10 +26,12 @@ export default {
   methods: {
     removeTodo: function(todoItem, index) {
       console.log(todoItem, index);
+      this.$emit('removeItem', todoItem, index);
+
       // localStorage 에서 지우기
-      localStorage.removeItem(todoItem); // key와 값이 같아서 가능
+      //localStorage.removeItem(todoItem); // key와 값이 같아서 가능
       // 배열 메소드로 지우기
-      this.todoItems.splice(index, 1);
+      //this.todoItems.splice(index, 1);
     },
     toggleComplete: function(todoItem, index) {
       todoItem.completed = !todoItem.completed;

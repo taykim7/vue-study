@@ -8,14 +8,15 @@
 
     <!-- app -->
     <div id="app">
-      <button id="show-modal" @click="showModal = true">Show Modal</button>
+      <!-- <button id="show-modal" @click="showModal = true">Show Modal</button> -->
       <!-- use the modal component, pass in the prop -->
       <Modal v-if="showModal" @close="showModal = false">
-        <!--
-      you can use custom content here to overwrite
-      default content
-    -->
-        <h3 slot="header">custom header</h3>
+        <h3 slot="header" @click="showModal = false">
+          엥
+          <i class="closeModalBtn fas fa-times" ></i>
+        </h3>
+        <div slot="body">아무것도 안할거야?</div>
+        
       </Modal>
     </div>
   </div>
@@ -34,21 +35,12 @@ export default {
   methods: {
     addTodo: function() {
       if (this.newTodoItem !== '') {
-        // ○ 저장하는 로직 (localStorage.setItem)
-        //localStorage.setItem(this.newTodoItem, this.newTodoItem);
-        
-        // 이제는 완료 여부도 추가해야함
-        //var obj = {completed: false, item: this.newTodoItem};
-        
-        // 자바스크립트 객체를 string 으로 직렬화
-        //localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
-        
-        //this.$emit('이벤트이름', 인자1, 인자2, ...);
         this.$emit('addTodoItem', this.newTodoItem);
         
         // input의 텍스트를 비움
         this.clearInput();
       } else {
+        this.showModal = !this.showModal
       }
     },
     clearInput: function() {
@@ -88,5 +80,8 @@ input:focus {
 .addBtn {
   color: white;
   vertical-align: middle;
+}
+.closeModalBtn {
+  color: #42b983;
 }
 </style>

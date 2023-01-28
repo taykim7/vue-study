@@ -6,22 +6,13 @@
 
                 <div class="modal-header">
                 <slot name="header">
-                    default header
+                    슬롯으로 여기 내용을 재정의함
                 </slot>
                 </div>
 
                 <div class="modal-body">
                 <slot name="body">
-                    default body
-                </slot>
-                </div>
-
-                <div class="modal-footer">
-                <slot name="footer">
-                    default footer
-                    <button class="modal-default-button" @click="$emit('close')">
-                    OK
-                    </button>
+                    슬롯으로 여기 내용을 재정의함
                 </slot>
                 </div>
             </div>

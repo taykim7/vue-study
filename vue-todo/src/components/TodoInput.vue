@@ -5,14 +5,30 @@
     <span class="addContainer" v-on:click="addTodo">
       <i class="fa-solid fa-plus addBtn"></i>
     </span>
+
+    <!-- app -->
+    <div id="app">
+      <button id="show-modal" @click="showModal = true">Show Modal</button>
+      <!-- use the modal component, pass in the prop -->
+      <Modal v-if="showModal" @close="showModal = false">
+        <!--
+      you can use custom content here to overwrite
+      default content
+    -->
+        <h3 slot="header">custom header</h3>
+      </Modal>
+    </div>
   </div>
 </template>
 
 <script>
+import Modal from './common/Modal.vue'
+
 export default {
   data: function () {
     return {
-      newTodoItem: ""
+      newTodoItem: "",
+      showModal: false
     }
   },
   methods: {
@@ -32,11 +48,15 @@ export default {
         
         // input의 텍스트를 비움
         this.clearInput();
+      } else {
       }
     },
     clearInput: function() {
       this.newTodoItem = '';
     }
+  },
+  components: {
+    Modal: Modal
   }
 
 }

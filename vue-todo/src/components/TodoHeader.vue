@@ -1,6 +1,6 @@
 <template>
   <header>
-    <h1>투두리스트</h1>
+    <h1> 투두리스트 </h1>
   </header>
 </template>
 

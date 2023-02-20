@@ -35,8 +35,8 @@ export default {
   methods: {
     addTodo() {
       if (this.newTodoItem !== '') {
-        this.$emit('addTodoItem', this.newTodoItem);
-        
+        //this.$emit('addTodoItem', this.newTodoItem);
+        this.$store.commit('addOneItem', this.newTodoItem);
         // input의 텍스트를 비움
         this.clearInput();
       } else {

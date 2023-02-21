@@ -2,8 +2,8 @@
   <div id="app">
     <TodoHeader></TodoHeader>
     <TodoInput></TodoInput>
-    <TodoList v-bind:propsdata="todoItems" v-on:toggleItem="toggleOneItem"></TodoList>
-    <TodoFooter v-on:clearAll="clearAllItems"></TodoFooter>
+    <TodoList></TodoList>
+    <TodoFooter></TodoFooter>
   </div>
 </template>
 
@@ -14,32 +14,8 @@ import TodoList from './components/TodoList.vue'
 import TodoFooter from './components/TodoFooter.vue'
 
 export default {
-  data(){
-    return {
-      todoItems: []
-    }
-  },
   methods: {
     // ○ store.js의 mutuations 로 이동
-
-    // addOneItem(todoItem) {
-    //   const obj = {completed: false, item: todoItem};
-    //   localStorage.setItem(todoItem, JSON.stringify(obj));
-    //   this.todoItems.push(obj);
-    // },
-    // removeOneItem(todoItem, index) {
-    //   localStorage.removeItem(todoItem.item);
-    //   this.todoItems.splice(index, 1);
-    // },
-    toggleOneItem(todoItem, index) {
-      this.todoItems[index].completed = !this.todoItems[index].completed;
-      localStorage.removeItem(todoItem.item);
-      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
-    },
-    clearAllItems() {
-      localStorage.clear();
-      this.todoItems = [];
-    }
   },
   components: {
     // 컴포넌트 태그명 : 컴포넌트 내용

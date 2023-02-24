@@ -1,40 +1,48 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 // 스토어 속성 모듈화1
-import * as getters from './getters'
-import * as mutations from './mutations'
+// import * as getters from './getters'
+// import * as mutations from './mutations'
+
+// 스토어 속성 모듈화2
+import todoApp from './modules/todoApp'
 
 Vue.use(Vuex);
 
-const storage = {
-  fetch() {
-    const arr = [];
-    if (localStorage.length > 0) {
-      for (let i = 0; i < localStorage.length ; i++) {
-        if (localStorage.key(i) !== 'loglevel:webpack-dev-server'){
-          // 배열에 push
-          arr.push(JSON.parse(localStorage.getItem(localStorage.key(i))))
-        }
-      }
-    }
-    // 배열 반환
-    return arr;
-  },
-};
+// const storage = {
+//   fetch() {
+//     const arr = [];
+//     if (localStorage.length > 0) {
+//       for (let i = 0; i < localStorage.length ; i++) {
+//         if (localStorage.key(i) !== 'loglevel:webpack-dev-server'){
+//           // 배열에 push
+//           arr.push(JSON.parse(localStorage.getItem(localStorage.key(i))))
+//         }
+//       }
+//     }
+//     // 배열 반환
+//     return arr;
+//   },
+// };
 
 export const store = new Vuex.Store({
-  state: {
-    todoItems: storage.fetch()
-  },
+  modules: {
+    todoApp
+  }
+
+  // ▼ 스토어 모듈화2 적용 전
+  // state: {
+  //   todoItems: storage.fetch()
+  // },
   
   //getters: getters,
   //mutations: mutations
 
   // 축약 가능
-  getters,
-  mutations
+  // getters,
+  // mutations
   
-  // ▼ 스토어 모듈화 적용 전
+  // ▼ 스토어 모듈화1 적용 전
   // getters: {
   //   // storedTodoItems(state) {
   //   //   return state.todoItems;

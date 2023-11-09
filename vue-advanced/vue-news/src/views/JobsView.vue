@@ -1,5 +1,7 @@
 <template>
-   <div>jobs</div>
+   <div>jobs
+    <div v-for="job in jobs">{{ job.title }}</div>
+   </div>
 </template>
 
 <script>
@@ -15,7 +17,7 @@ export default {
     fetchJobsList()
       .then((response)=>{
         console.log(response);
-        vm.ask = response.data;
+        vm.jobs = response.data;
       })
       .catch((error) => {
         console.log(error);

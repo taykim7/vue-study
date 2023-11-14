@@ -12,7 +12,7 @@ export const store = new Vuex.Store({
     */
     FETCH_NEWS(context) {
       fetchNewsList()
-      .then(response => {
+        .then(response => {
         console.log(response.data);
         // 컨텍스트의 커밋으로 뮤테이션 호출
         context.commit('SET_NEWS', response.data);
@@ -22,19 +22,22 @@ export const store = new Vuex.Store({
       })
     },
     /**
-     * Ask api
+     * Jobs api
+     * - context와 response를 더 줄이기
      */
-    FETCH_ASK(context) {
-      fetchAskList().then(response => {
-        context.commit('SET_ASK', response.data)
+    FETCH_JOBS({commit}) {
+      fetchJobsList()
+        .then( ({ data }) => {
+        commit('SET_JOBS', data);
       })
     },
     /**
-     * Jobs api
+     * Ask api
      */
-    FETCH_JOBS(context) {
-      fetchJobsList().then(response => {
-        context.commit('SET_JOBS', response.data)
+    FETCH_ASK({commit}) {
+      fetchAskList()
+        .then( ({ data }) => {
+        commit('SET_ASK', data)
       })
     }
   },
@@ -42,17 +45,21 @@ export const store = new Vuex.Store({
     SET_NEWS(state, data) {
       state.news = data;
     },
+    SET_JOBS(state, data) {
+      state.jobs = data;
+    },
     SET_ASK(state, data) {
       state.ask = data;
     },
-    SET_JOBS(state, data) {
-      state.jobs = data;
-    }
   },
   state: {
     news: [],
+    jobs: [],
     ask: [],
-    jobs: []
   },
-  // getters: {},
+  getters: {
+    fetchedAsk(state) {
+      return state.ask;
+    }
+  },
 })

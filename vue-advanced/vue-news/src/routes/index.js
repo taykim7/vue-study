@@ -27,13 +27,15 @@ export const router = new VueRouter({
       path: '/jobs',
       component: JobsView,
     },
+    // 동적 라우팅
+    {
+      path: '/user/:id',
+      component: UserView,
+    },
     {
       path: '/item',
       component: ItemView,
     },
-    {
-      path: '/user',
-      component: UserView,
-    },
+    
   ]
 })

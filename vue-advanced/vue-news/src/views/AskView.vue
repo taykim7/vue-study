@@ -6,9 +6,10 @@
     <div>
     <!-- 1, 2, 3 좀 더 간단하게 연결 -->
     <p v-for="(item) in ask">
-      <a :href="item.url">
+      <!-- <a :href="item.url">
         {{ item.title }}
-      </a>
+      </a> -->
+       <router-link :to="`/item/${item.id}`">{{ item.title }}</router-link>
       <small>{{ item.user }} by {{ item.user }}</small>
     </p>
   </div>

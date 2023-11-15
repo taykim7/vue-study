@@ -1,12 +1,17 @@
 <template>
-   <div>news
+   <div>
     <!-- 0. 무식하게 연결 -->
     <!-- <div v-for=" (item) in this.$store.state.ask"> -->
     
+    <div>
     <!-- 1, 2, 3 좀 더 간단하게 연결 -->
-    <div v-for=" (item) in ask">
-      {{ item.title }}
-    </div>
+    <p v-for="(item) in ask">
+      <a :href="item.url">
+        {{ item.title }}
+      </a>
+      <small>{{ item.user }} by {{ item.user }}</small>
+    </p>
+  </div>
   </div>
 </template>
 

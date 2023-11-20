@@ -12,7 +12,7 @@
       </small>
     </p> -->
 
-    <ul class="news-list">
+    <!-- <ul class="news-list">
       <li v-for="(item) in this.$store.state.news" class="post">
         <div class="points">
           {{ item.points }}
@@ -31,14 +31,16 @@
         </small>
         </div>
       </li>
-    </ul>
+    </ul> -->
+    <list-item></list-item>
   </div>
 </template>
 
 <script>
+import ListItem from '../components/ListItem.vue'
 
 export default {
-  created() {
+  //created() {
     // ▼ this가 Vue 인스턴스(컴포넌트)로 연결하기 위해 vm 정의
     // var vm = this;
     // fetchNewsList()
@@ -51,14 +53,17 @@ export default {
     //   })
     
     // ▼ dispatch를 통해 코드 제어 넘기기
-    this.$store.dispatch('FETCH_NEWS')
+    //this.$store.dispatch('FETCH_NEWS')
+  //}
+  // ListItem.vue 활용
+  components: {
+    ListItem,
   }
-
 }
 </script>
 
 <style scoped>
-  .news-list {
+  /* .news-list {
     margin: 0;
     padding: 0;
   }
@@ -81,5 +86,5 @@ export default {
   }
   .link-text {
     color: #828282;
-  }
+  } */
 </style>

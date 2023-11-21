@@ -10,13 +10,20 @@
           {{ userInfo.created}}
         </div> -->
         <!-- (2) -->
-        <div>{{ info.id }}</div>
-        <div class="time">
-          {{ info.created}}
-        </div>
+        <!-- <div>username : {{ info.id }}</div> -->
         <!-- <router-link :to="`/user/${userInfo.user}`">
           {{ userInfo.user }}
         </router-link> -->
+          <slot name="username">
+            <!-- 상위 컴포넌트에서 정의할 영역 -->
+          </slot>
+        <div class="time">
+          <!-- time : {{ info.created}} -->
+          <slot name="time">
+            <!-- 상위 컴포넌트에서 정의할 영역 -->
+          </slot>
+        </div>
+        <slot name="karma"></slot>
       </div>
     </div>
 </template>

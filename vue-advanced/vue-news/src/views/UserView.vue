@@ -9,7 +9,11 @@
     <p>
       언제 : {{ userInfo.created}}
     </p> -->
-    <user-profile :info="userInfo"></user-profile>
+    <user-profile :info="userInfo">
+      <div slot="username">{{ userInfo.id }}</div>
+      <span slot="time">{{ 'Joined ' + userInfo.created}}, </span>
+      <span slot="karma">{{ userInfo.karma}}</span>
+    </user-profile>
   </div>
 </template>
 

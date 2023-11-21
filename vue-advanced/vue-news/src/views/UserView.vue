@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>
+    <!-- <p>
       이름 : {{ userInfo.id}}
     </p>
     <p>
@@ -8,13 +8,19 @@
     </p>
     <p>
       언제 : {{ userInfo.created}}
-    </p>
+    </p> -->
+    <user-profile :info="userInfo"></user-profile>
   </div>
 </template>
 
 <script>
 //import axios from 'axios';
+import UserProfile from '../components/UserProfile.vue'
+
 export default {
+  components: {
+    UserProfile
+  },
   computed: {
     userInfo() {
       return this.$store.state.user;

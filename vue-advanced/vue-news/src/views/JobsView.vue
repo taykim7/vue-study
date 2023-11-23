@@ -26,12 +26,21 @@
 
 <script>
 import ListItem from '../components/ListItem.vue'
+import bus from '../utils/bus';
 
 export default {
   components: { ListItem },
-  // created() {
-  //   this.$store.dispatch('FETCH_JOBS')
-  // }
+  
+  created() {
+    // 패치를 하는 동안 로딩 띄우기
+    this.$store.dispatch('FETCH_JOBS')
+      .then(() => {
+        bus.$$emit('end:spinner');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
 }
 </script>

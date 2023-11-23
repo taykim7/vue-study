@@ -7,9 +7,10 @@ export default{
   FETCH_NEWS(context) {
     fetchNewsList()
       .then(response => {
-        console.log(response.data);
+        //console.log(response.data);
         // 컨텍스트의 커밋으로 뮤테이션 호출
         context.commit('SET_NEWS', response.data);
+        return response;
       })
     .catch(error => {
       console.log(error)

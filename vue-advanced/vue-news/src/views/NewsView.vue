@@ -57,9 +57,17 @@ export default {
     //this.$store.dispatch('FETCH_NEWS')
 
     // bus로 emit을 통해 이벤트를 전송
-    bus.$emit('start:spinner');
-    bus.$emit('end:spinner');
-    this.$store.dispatch('FETCH_NEWS');
+    //bus.$emit('start:spinner');
+    //bus.$emit('end:spinner');
+
+    // 패치를 하는 동안 로딩 띄우기
+    this.$store.dispatch('FETCH_NEWS')
+      .then(() => {
+        bus.$$emit('end:spinner');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
   // ListItem.vue 활용
   components: {

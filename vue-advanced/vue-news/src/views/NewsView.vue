@@ -37,8 +37,8 @@
 </template>
 
 <script>
-import ListItem from '../components/ListItem.vue'
-import bus from '../utils/bus';
+//import ListItem from '../components/ListItem.vue'
+//import bus from '../utils/bus';
 
 export default {
   created() {
@@ -61,17 +61,17 @@ export default {
     //bus.$emit('end:spinner');
 
     // 패치를 하는 동안 로딩 띄우기
-    this.$store.dispatch('FETCH_NEWS')
-      .then(() => {
-        bus.$$emit('end:spinner');
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // this.$store.dispatch('FETCH_NEWS')
+    //   .then(() => {
+    //     bus.$$emit('end:spinner');
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   },
   // ListItem.vue 활용
   components: {
-    ListItem,
+    //ListItem,
   }
 }
 </script>

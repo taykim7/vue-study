@@ -25,8 +25,8 @@
 <script>
 // import { mapState } from 'vuex';
 //import { mapGetters } from 'vuex';
-import ListItem from '../components/ListItem.vue'
-import bus from '../utils/bus';
+//import ListItem from '../components/ListItem.vue'
+//import bus from '../utils/bus';
 
 export default {
   computed: {
@@ -53,16 +53,16 @@ export default {
   },
   created() {
     // 패치를 하는 동안 로딩 띄우기
-    this.$store.dispatch('FETCH_ASK')
-      .then(() => {
-        bus.$$emit('end:spinner');
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // this.$store.dispatch('FETCH_ASK')
+    //   .then(() => {
+    //     bus.$$emit('end:spinner');
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   },
   components: {
-    ListItem,
+    //ListItem,
   }
 }
 </script>

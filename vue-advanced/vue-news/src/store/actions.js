@@ -1,40 +1,47 @@
-import { fetchNewsList, fetchAskList, fetchJobsList, fetchUserInfo, fetchItemInfo, fetchList } from '../api/index'
+import {
+  // fetchNewsList,
+  // fetchAskList,
+  // fetchJobsList,
+  fetchUserInfo,
+  fetchItemInfo,
+  fetchList
+} from '../api/index'
 
 export default{
   /**
    * News api
   */
-  FETCH_NEWS(context) {
-    fetchNewsList()
-      .then(response => {
-        //console.log(response.data);
-        // 컨텍스트의 커밋으로 뮤테이션 호출
-        context.commit('SET_NEWS', response.data);
-        return response;
-      })
-    .catch(error => {
-      console.log(error)
-    })
-  },
+  // FETCH_NEWS(context) {
+  //   fetchNewsList()
+  //     .then(response => {
+  //       //console.log(response.data);
+  //       // 컨텍스트의 커밋으로 뮤테이션 호출
+  //       context.commit('SET_NEWS', response.data);
+  //       return response;
+  //     })
+  //   .catch(error => {
+  //     console.log(error)
+  //   })
+  // },
   /**
    * Jobs api
    * - context와 response를 더 줄이기
    */
-  FETCH_JOBS({commit}) {
-    fetchJobsList()
-      .then( ({ data }) => {
-        commit('SET_JOBS', data);
-      })
-  },
+  // FETCH_JOBS({commit}) {
+  //   fetchJobsList()
+  //     .then( ({ data }) => {
+  //       commit('SET_JOBS', data);
+  //     })
+  // },
   /**
    * Ask api
    */
-  FETCH_ASK({commit}) {
-    fetchAskList()
-      .then( ({ data }) => {
-        commit('SET_ASK', data)
-      })
-  },
+  // FETCH_ASK({commit}) {
+  //   fetchAskList()
+  //     .then( ({ data }) => {
+  //       commit('SET_ASK', data)
+  //     })
+  // },
   /**
    * User
    */

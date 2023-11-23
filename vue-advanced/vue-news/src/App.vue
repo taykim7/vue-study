@@ -4,17 +4,48 @@
     <transition name="page">
       <router-view></router-view>
     </transition>
+    <!-- 로딩바 -->
+    <spinner :loading="loadingStatus"></spinner>
   </div>
 </template>
 
 <script>
 import ToolBar from './components/ToolBar.vue';
+import Spinner from './components/Spinner.vue';
+import bus from './utils/bus'
 
 export default {
   name: 'App',
   components: {
     ToolBar,
+    Spinner,
+  },
+  data() {
+    return {
+      // 로딩 상태
+      loadingStatus: false, 
+    }
+  },
+  created() {
+    // bus를 통해 이벤트를 받음
+    bus.$on('start:spinner', this.startSpinner );
+    bus.$on('end:spinner', this.endSpinner );
+  },
+  methods: {
+    // 로딩 상태를 컨트롤할 수 있도록 명시적 메서드를 활용
+    startSpinner() {
+      this.loadingStatus = true;
+    },
+    endSpinner() {
+      this.loadingStatus = false;
+    }
+  },
+  beforeDestroy() {
+    // **이벤트를 등록하면 계속 쌓이기 때문에 꼭 종료시키자(off)
+    bus.$off('start:spinner', this.startSpinner)
+    bus.$off('end:spinner', this.endSpinner)
   }
+  
 }
 </script>
 

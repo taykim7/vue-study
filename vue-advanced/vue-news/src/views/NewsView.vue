@@ -38,9 +38,10 @@
 
 <script>
 import ListItem from '../components/ListItem.vue'
+import bus from '../utils/bus';
 
 export default {
-  //created() {
+  created() {
     // ▼ this가 Vue 인스턴스(컴포넌트)로 연결하기 위해 vm 정의
     // var vm = this;
     // fetchNewsList()
@@ -54,7 +55,12 @@ export default {
     
     // ▼ dispatch를 통해 코드 제어 넘기기
     //this.$store.dispatch('FETCH_NEWS')
-  //}
+
+    // bus로 emit을 통해 이벤트를 전송
+    bus.$emit('start:spinner');
+    bus.$emit('end:spinner');
+    this.$store.dispatch('FETCH_NEWS');
+  },
   // ListItem.vue 활용
   components: {
     ListItem,

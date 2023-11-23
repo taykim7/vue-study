@@ -53,13 +53,14 @@ export default {
   },
   computed: {
     listItem() {
-      if (this.$route.name === 'news') {
-        return this.$store.state.news;
-      } else if (this.$route.name === 'ask') {
-        return this.$store.state.ask;
-      } else if (this.$route.name === 'jobs') {
-        return this.$store.state.jobs;
-      } else return ''
+      // if (this.$route.name === 'news') {
+      //   return this.$store.state.news;
+      // } else if (this.$route.name === 'ask') {
+      //   return this.$store.state.ask;
+      // } else if (this.$route.name === 'jobs') {
+      //   return this.$store.state.jobs;
+      // } else return ''
+      return this.$store.state.list;
     }
   }
 }

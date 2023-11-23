@@ -43,13 +43,13 @@
 export default {
   created() {
     // this.$store.dispatch('FETCH_NEWS')
-    if (this.$route.path === '/news') {
-      this.$store.dispatch('FETCH_NEWS');
-    } else if (this.$route.path === '/ask') {
-      this.$store.dispatch('FETCH_ASK');
-    } else if (this.$route.path === '/jobs') {
-      this.$store.dispatch('FETCH_JOBS');
-    } 
+    // if (this.$route.path === '/news') {
+      //   this.$store.dispatch('FETCH_NEWS');
+    // } else if (this.$route.path === '/ask') {
+      //   this.$store.dispatch('FETCH_ASK');
+    // } else if (this.$route.path === '/jobs') {
+      //   this.$store.dispatch('FETCH_JOBS');
+    // } 
   },
   computed: {
     listItem() {

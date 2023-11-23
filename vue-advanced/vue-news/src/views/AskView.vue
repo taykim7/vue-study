@@ -25,8 +25,9 @@
 <script>
 // import { mapState } from 'vuex';
 //import { mapGetters } from 'vuex';
-//import ListItem from '../components/ListItem.vue'
 //import bus from '../utils/bus';
+import ListItem from '../components/ListItem.vue'
+import ListMixin from '../mixins/ListMixin'
 
 export default {
   computed: {
@@ -62,7 +63,9 @@ export default {
     //   });
   },
   components: {
-    //ListItem,
-  }
+    ListItem,
+  },
+  // 믹스인 추가
+  mixins: [ ListMixin ],
 }
 </script>

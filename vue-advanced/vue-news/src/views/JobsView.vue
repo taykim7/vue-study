@@ -25,12 +25,13 @@
 </template>
 
 <script>
-//import ListItem from '../components/ListItem.vue'
 //import bus from '../utils/bus';
+import ListItem from '../components/ListItem.vue'
+import ListMixin from '../mixins/ListMixin'
 
 export default {
   components: {
-    //ListItem
+    ListItem
   },
   created() {
     // 패치를 하는 동안 로딩 띄우기
@@ -41,7 +42,9 @@ export default {
     //   .catch((error) => {
     //     console.log(error);
     //   });
-  }
+  },
+  // 믹스인 추가
+  mixins: [ ListMixin ],
 
 }
 </script>

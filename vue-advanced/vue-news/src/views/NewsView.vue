@@ -37,8 +37,9 @@
 </template>
 
 <script>
-//import ListItem from '../components/ListItem.vue'
 //import bus from '../utils/bus';
+import ListItem from '../components/ListItem.vue'
+import ListMixin from '../mixins/ListMixin'
 
 export default {
   created() {
@@ -71,8 +72,10 @@ export default {
   },
   // ListItem.vue 활용
   components: {
-    //ListItem,
-  }
+    ListItem,
+  },
+  // 믹스인 추가
+  mixins: [ ListMixin ],
 }
 </script>
 

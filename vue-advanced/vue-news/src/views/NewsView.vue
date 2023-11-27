@@ -39,7 +39,7 @@
 <script>
 //import bus from '../utils/bus';
 import ListItem from '../components/ListItem.vue'
-import ListMixin from '../mixins/ListMixin'
+//import ListMixin from '../mixins/ListMixin'
 
 export default {
   created() {
@@ -75,7 +75,7 @@ export default {
     ListItem,
   },
   // 믹스인 추가
-  mixins: [ ListMixin ],
+  //mixins: [ ListMixin ],
 }
 </script>
 

@@ -31,6 +31,7 @@ export default{
     return fetchJobsList()
       .then( ({ data }) => {
         commit('SET_JOBS', data);
+        return data
       })
   },
   /**
@@ -38,8 +39,9 @@ export default{
    */
   FETCH_ASK({commit}) {
     return fetchAskList()
-      .then( ({ data }) => {
-        commit('SET_ASK', data)
+      .then( (response) => {
+        commit('SET_ASK', response.data)
+        return response
       })
   },
   /**
@@ -70,6 +72,7 @@ export default{
    * List
    */
   FETCH_LIST({commit}, pageName) {
+    console.log(pageName)
     return fetchList(pageName)
     .then( response => {
       console.log('api 호출 중');

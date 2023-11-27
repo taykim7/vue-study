@@ -27,7 +27,8 @@
 <script>
 //import bus from '../utils/bus';
 import ListItem from '../components/ListItem.vue'
-import ListMixin from '../mixins/ListMixin'
+//import ListMixin from '../mixins/ListMixin'
+import bus from '../utils/bus'
 
 export default {
   components: {
@@ -44,7 +45,10 @@ export default {
     //   });
   },
   // 믹스인 추가
-  mixins: [ ListMixin ],
+  //mixins: [ ListMixin ],
+   mounted() {
+    bus.$emit('end:spinner');
+  }
 
 }
 </script>

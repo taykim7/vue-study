@@ -34,9 +34,11 @@ export default {
   methods: {
     // 로딩 상태를 컨트롤할 수 있도록 명시적 메서드를 활용
     startSpinner() {
+      console.log('스피너 시작')
       this.loadingStatus = true;
     },
     endSpinner() {
+      console.log('스피너 끝')
       this.loadingStatus = false;
     }
   },

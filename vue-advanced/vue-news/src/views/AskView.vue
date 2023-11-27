@@ -27,7 +27,8 @@
 //import { mapGetters } from 'vuex';
 //import bus from '../utils/bus';
 import ListItem from '../components/ListItem.vue'
-import ListMixin from '../mixins/ListMixin'
+//import ListMixin from '../mixins/ListMixin'
+import bus from '../utils/bus'
 
 export default {
   computed: {
@@ -50,7 +51,6 @@ export default {
     // ...mapGetters({
     //   ask: 'fetchedAsk'
     // })
-
   },
   created() {
     // 패치를 하는 동안 로딩 띄우기
@@ -66,6 +66,9 @@ export default {
     ListItem,
   },
   // 믹스인 추가
-  mixins: [ ListMixin ],
+  //mixins: [ ListMixin ],
+  mounted() {
+    bus.$emit('end:spinner');
+  }
 }
 </script>

@@ -6,8 +6,10 @@ export default {
   created() {
     // 패치를 하는 동안 로딩 띄우기
     bus.$emit('start:spinner');
+    console.log('api 호출 전');
     this.$store.dispatch('FETCH_LIST', this.$route.name)
       .then(() => {
+        console.log('api 호출완료');
         bus.$emit('end:spinner');
       })
       .catch((error) => {

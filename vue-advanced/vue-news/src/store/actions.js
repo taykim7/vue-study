@@ -12,7 +12,7 @@ export default{
    * News api
   */
   FETCH_NEWS(context) {
-    fetchNewsList()
+    return fetchNewsList()
       .then(response => {
         //console.log(response.data);
         // 컨텍스트의 커밋으로 뮤테이션 호출
@@ -28,7 +28,7 @@ export default{
    * - context와 response를 더 줄이기
    */
   FETCH_JOBS({commit}) {
-    fetchJobsList()
+    return fetchJobsList()
       .then( ({ data }) => {
         commit('SET_JOBS', data);
       })
@@ -37,7 +37,7 @@ export default{
    * Ask api
    */
   FETCH_ASK({commit}) {
-    fetchAskList()
+    return fetchAskList()
       .then( ({ data }) => {
         commit('SET_ASK', data)
       })
@@ -46,7 +46,7 @@ export default{
    * User
    */
   FETCH_USER({commit}, userName) {
-    fetchUserInfo(userName)
+    return fetchUserInfo(userName)
       .then( ({ data }) => {
         commit('SET_USER', data)
       })
@@ -58,7 +58,7 @@ export default{
    * Item
    */
   FETCH_ITEM({commit}, id) {
-    fetchItemInfo(id)
+    return fetchItemInfo(id)
       .then( ({ data }) => {
         commit('SET_ITEM', data)
       })
@@ -70,9 +70,11 @@ export default{
    * List
    */
   FETCH_LIST({commit}, pageName) {
-    fetchList(pageName)
-    .then( ({ data }) => {
-      commit('SET_LIST', data)
+    return fetchList(pageName)
+    .then( response => {
+      console.log('api 호출 중');
+      commit('SET_LIST', response.data);
+      return response;
     })
     .catch(error=>{
       console.log(error);

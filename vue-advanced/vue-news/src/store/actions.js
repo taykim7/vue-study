@@ -11,38 +11,51 @@ export default{
   /**
    * News api
   */
-  FETCH_NEWS(context) {
-    return fetchNewsList()
-      .then(response => {
-        //console.log(response.data);
-        // 컨텍스트의 커밋으로 뮤테이션 호출
-        context.commit('SET_NEWS', response.data);
+  // return await fetchNewsList()
+    //   .then(response => {
+    //     //console.log(response.data);
+    //     // 컨텍스트의 커밋으로 뮤테이션 호출
+    //     context.commit('SET_NEWS', response.data);
+    //     return response;
+    //   })
+    // .catch(error => {
+    //   console.log(error)
+    // })
+
+    // async 화
+    async FETCH_NEWS(context) {
+      try {
+        const response = await fetchNewsList();
+        context.commit('SET_NEWS', response.data)
+        // 결과값이 return되어야 순서를 보장할 수 있음 **
         return response;
-      })
-    .catch(error => {
-      console.log(error)
-    })
+      } catch (error) {
+        console.log(error)
+      }   
   },
   /**
    * Jobs api
-   * - context와 response를 더 줄이기
    */
-  FETCH_JOBS({commit}) {
-    return fetchJobsList()
-      .then( ({ data }) => {
-        commit('SET_JOBS', data);
-        return data
-      })
+  async FETCH_JOBS({commit}) {
+    try{
+      const response = await fetchJobsList();
+      commit('SET_JOBS', response.data);
+      return response;
+    } catch (error) {
+      console.log(error)
+    }  
   },
   /**
    * Ask api
    */
-  FETCH_ASK({commit}) {
-    return fetchAskList()
-      .then( (response) => {
-        commit('SET_ASK', response.data)
-        return response
-      })
+  async FETCH_ASK({commit}) {
+    try{
+      const response = await fetchAskList();
+      commit('SET_ASK', response.data);
+      return response;
+    } catch (error) {
+      console.log(error)
+    }  
   },
   /**
    * User

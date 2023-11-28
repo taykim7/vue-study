@@ -49,51 +49,34 @@ export default{
    * Ask api
    */
   async FETCH_ASK({commit}) {
-    try{
-      const response = await fetchAskList();
-      commit('SET_ASK', response.data);
-      return response;
-    } catch (error) {
-      console.log(error)
-    }  
+    const response = await fetchAskList();
+    commit('SET_ASK', response.data);
+    // api 단에서 에러 처리를 해줌
+    return response;
   },
   /**
    * User
    */
-  FETCH_USER({commit}, userName) {
-    return fetchUserInfo(userName)
-      .then( ({ data }) => {
-        commit('SET_USER', data)
-      })
-      .catch(error=> {
-        console.log(error)
-      })
+  async FETCH_USER({commit}, userName) {
+    const response = await fetchUserInfo(userName);
+    commit('SET_USER', response.data);
+    return response;
   },
   /**
    * Item
    */
-  FETCH_ITEM({commit}, id) {
-    return fetchItemInfo(id)
-      .then( ({ data }) => {
-        commit('SET_ITEM', data)
-      })
-      .catch(error=>{
-        console.log(error);
-      })
+  async FETCH_ITEM({commit}, id) {
+    const response = await fetchItemInfo(id);
+    commit('SET_ITEM', response.data);
+    return response;
   },
   /**
    * List
    */
-  FETCH_LIST({commit}, pageName) {
+  async FETCH_LIST({commit}, pageName) {
     console.log(pageName)
-    return fetchList(pageName)
-    .then( response => {
-      console.log('api 호출 중');
-      commit('SET_LIST', response.data);
-      return response;
-    })
-    .catch(error=>{
-      console.log(error);
-    })
+    const response = await fetchList(pageName);
+    commit('SET_LIST', response.data);
+    return response; 
   }
 }

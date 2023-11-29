@@ -1,6 +1,6 @@
 <template>
   <div>
-    <canvas id="barChart" width="400" height="400"></canvas>
+    <canvas id="lineChart"></canvas>
   </div>
 </template>
 
@@ -10,16 +10,15 @@ Chart.register(...registerables);
 
 export default {
   mounted() {
-    const ctx = document.getElementById('barChart');
+    const ctx = document.getElementById('lineChart');
 
     new Chart(ctx, {
-      type: 'bar',
+      type: 'line',
       data: {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
         datasets: [{
           label: '# of Votes',
           data: [12, 19, 3, 5, 2, 3],
-          borderWidth: 1
         }]
       },
       options: {
@@ -32,6 +31,8 @@ export default {
     });
   }
 }
+
+
 </script>
 
 <style>

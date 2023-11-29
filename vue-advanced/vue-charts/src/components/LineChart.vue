@@ -1,6 +1,6 @@
 <template>
   <div>
-    <canvas id="lineChart"></canvas>
+    <canvas ref='lineChart' id="lineChart"></canvas>
   </div>
 </template>
 
@@ -10,9 +10,7 @@ Chart.register(...registerables);
 
 export default {
   mounted() {
-    const ctx = document.getElementById('lineChart');
-
-    new Chart(ctx, {
+    new Chart(this.$refs.lineChart.getContext('2d'), {
       type: 'line',
       data: {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],

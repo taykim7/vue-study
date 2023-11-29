@@ -5,12 +5,13 @@
 </template>
 
 <script>
-import { Chart, registerables } from 'chart.js'
-Chart.register(...registerables);
+// import { Chart, registerables } from 'chart.js'
+// Chart.register(...registerables);
+// → this.$_Chart 로 사용가능
 
 export default {
   mounted() {
-    new Chart(this.$refs.lineChart.getContext('2d'), {
+    new this.$_Chart(this.$refs.lineChart.getContext('2d'), {
       type: 'line',
       data: {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],

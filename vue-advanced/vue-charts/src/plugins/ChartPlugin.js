@@ -1,5 +1,8 @@
+import { Chart, registerables } from 'chart.js'
+Chart.register(...registerables);
+
 export default {
-  install() {
-    console.log('차트 플러그인 로드')
+  install(Vue) {
+    Vue.prototype.$_Chart = Chart;
   }
 }

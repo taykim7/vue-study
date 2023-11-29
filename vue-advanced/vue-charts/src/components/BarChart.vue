@@ -5,12 +5,13 @@
 </template>
 
 <script>
-import { Chart, registerables } from 'chart.js'
-Chart.register(...registerables);
+// import { Chart, registerables } from 'chart.js'
+// Chart.register(...registerables);
+// → this.$_Chart 로 사용가능
 
 export default {
   mounted() {
-    new Chart(this.$refs.barChart, {
+    new this.$_Chart(this.$refs.barChart, {
       type: 'bar',
       data: {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],

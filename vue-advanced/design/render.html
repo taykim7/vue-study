@@ -6,12 +6,24 @@
   <title>Render Function</title>
 </head>
 <body>
-  <div id="app"></div>
+  <div id="app">
+    <!-- 1. 기본 -->
+    <!-- <p>{{ message }}</p> -->
+  </div>
   
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script>
     new Vue({
       el: '#app',
+      data: {
+        message: '안녕'
+      },
+      // 2. template를 활용할 수 있음
+      //template: '<p>{{ message }}</p>'
+      // 3. render 함수 활용
+      render: function(createElement) {
+        return createElement('p', this.message);
+      }
     })
   </script>
 </body>

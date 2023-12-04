@@ -30,6 +30,9 @@ export default {
     // bus를 통해 이벤트를 받음
     bus.$on('start:spinner', this.startSpinner );
     bus.$on('end:spinner', this.endSpinner );
+    // .env
+    console.log(process.env.VUE_APP_TITLE); // .env 속 HELLO가 출력
+    
   },
   methods: {
     // 로딩 상태를 컨트롤할 수 있도록 명시적 메서드를 활용

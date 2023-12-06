@@ -12,7 +12,11 @@ const config = {
 function fetchFirstList() {
   return axios.get(`${config.baseUrl}news/1.json`);
 }
+function fetchSecondList() {
+  return axios.get(`${config.baseUrl}news/1.json`);
+}
 
 export {
   fetchFirstList,
+  fetchSecondList,
 }

@@ -1,4 +1,4 @@
-import { fetchSecondList } from '../api/index'
+import { fetchSecondList, fetchThirdList } from '../api/index'
 
 export default{
     async FETCH_SECOND(context) {
@@ -11,5 +11,33 @@ export default{
       } catch (error) {
         console.log(error)
       }   
-    }
+    },
+    // 지금은 다 같은 api를 호출하지만, 다르게도 가능
+    async FETCH_THIRD_ONE(context) {
+      try {
+        const response = await fetchThirdList();
+        context.commit('SET_THIRD_ONE', response.data)
+        return response;
+      } catch (error) {
+        console.log(error)
+      }   
+    },
+    async FETCH_THIRD_TWO(context) {
+      try {
+        const response = await fetchThirdList();
+        context.commit('SET_THIRD_TWO', response.data)
+        return response;
+      } catch (error) {
+        console.log(error)
+      }   
+    },
+    async FETCH_THIRD_THREE(context) {
+      try {
+        const response = await fetchThirdList();
+        context.commit('SET_THIRD_THREE', response.data)
+        return response;
+      } catch (error) {
+        console.log(error)
+      }   
+    },
 }

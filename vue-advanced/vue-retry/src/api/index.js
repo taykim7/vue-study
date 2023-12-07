@@ -15,8 +15,12 @@ function fetchFirstList() {
 function fetchSecondList() {
   return axios.get(`${config.baseUrl}news/1.json`);
 }
+function fetchThirdList() {
+  return axios.get(`${config.baseUrl}news/1.json`);
+}
 
 export {
   fetchFirstList,
   fetchSecondList,
+  fetchThirdList
 }

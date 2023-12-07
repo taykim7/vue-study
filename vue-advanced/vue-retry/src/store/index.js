@@ -13,5 +13,8 @@ export const store = new Vuex.Store({
   mutations,
   state: {
     list: [],
+    one: [],
+    two: [],
+    three: [],
   },
 })

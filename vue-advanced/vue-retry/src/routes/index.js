@@ -2,7 +2,10 @@ import Vue from 'vue';
 import VueRouter from 'vue-router'
 import FirstView from '../views/FirstView.vue'
 import SecondView from '../views/SecondView.vue'
-// import ThirdView from '../views/ThirdView.vue'
+import ThirdListView from '../views/ThirdListView.vue'
+import ThirdOneView from '../views/ThirdOneView.vue'
+import ThirdTwoView from '../views/ThirdTwoView.vue'
+import ThirdThreeView from '../views/ThirdThreeView.vue'
 
 Vue.use(VueRouter);
 
@@ -26,7 +29,22 @@ export const router = new VueRouter({
     },
     {
       path: '/third',
-      // component: ThirdView,
+      component: ThirdListView,
+    },
+    {
+      path: '/thirdone',
+      name: 'one',
+      component: ThirdOneView,
+    },
+    {
+      path: '/thirdtwo',
+      name: 'two',
+      component: ThirdTwoView,
+    },
+    {
+      path: '/thirdthree',
+      name: 'three',
+      component: ThirdThreeView,
     },
   ]
 })

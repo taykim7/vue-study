@@ -7,6 +7,7 @@ import ThirdOneView from '../views/ThirdOneView.vue'
 import ThirdTwoView from '../views/ThirdTwoView.vue'
 import ThirdThreeView from '../views/ThirdThreeView.vue'
 import SlotView from '../views/SlotView.vue'
+import EventBusView from '../views/EventBusView.vue'
 
 Vue.use(VueRouter);
 
@@ -51,6 +52,11 @@ export const router = new VueRouter({
       path: '/slot',
       name: 'slot',
       component: SlotView,
+    },
+    {
+      path: '/eventbus',
+      name: 'eventbus',
+      component: EventBusView,
     },
   ]
 })

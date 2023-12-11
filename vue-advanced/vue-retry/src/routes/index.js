@@ -6,6 +6,7 @@ import ThirdListView from '../views/ThirdListView.vue'
 import ThirdOneView from '../views/ThirdOneView.vue'
 import ThirdTwoView from '../views/ThirdTwoView.vue'
 import ThirdThreeView from '../views/ThirdThreeView.vue'
+import SlotView from '../views/SlotView.vue'
 
 Vue.use(VueRouter);
 
@@ -45,6 +46,11 @@ export const router = new VueRouter({
       path: '/thirdthree',
       name: 'three',
       component: ThirdThreeView,
+    },
+    {
+      path: '/slot',
+      name: 'slot',
+      component: SlotView,
     },
   ]
 })

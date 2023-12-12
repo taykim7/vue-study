@@ -11,4 +11,7 @@ export default {
   SET_THIRD_THREE(state, data) {
     state.three = data;
   },
+  SET_HOC_LIST(state, data) {
+    state.hocList = data;
+  }
 }

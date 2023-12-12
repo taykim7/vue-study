@@ -18,9 +18,19 @@ function fetchSecondList() {
 function fetchThirdList() {
   return axios.get(`${config.baseUrl}news/1.json`);
 }
+// pageName을 받음
+function fetchHocList(pageName) {
+  console.log(`응, ${pageName} 이거 패치할게`)
+  if (pageName === 'usehoc1') {
+    return axios.get(`${config.baseUrl}news/1.json`)
+  } else {
+    return axios.get(`${config.baseUrl}ask/1.json`)
+  }
+}
 
 export {
   fetchFirstList,
   fetchSecondList,
-  fetchThirdList
+  fetchThirdList,
+  fetchHocList
 }

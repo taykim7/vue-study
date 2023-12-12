@@ -8,6 +8,7 @@ import ThirdTwoView from '../views/ThirdTwoView.vue'
 import ThirdThreeView from '../views/ThirdThreeView.vue'
 import SlotView from '../views/SlotView.vue'
 import EventBusView from '../views/EventBusView.vue'
+import createListView from '../views/HocView.js'
 
 Vue.use(VueRouter);
 
@@ -57,6 +58,18 @@ export const router = new VueRouter({
       path: '/eventbus',
       name: 'eventbus',
       component: EventBusView,
+    },
+    {
+      path: '/usehoc1',
+      name: 'usehoc1',
+      //함수 기반 재사용
+      component: createListView('HocUseView1'),
+    },
+    {
+      path: '/usehoc2',
+      name: 'usehoc2',
+      //함수 기반 재사용
+      component: createListView('HocUseView2'),
     },
   ]
 })

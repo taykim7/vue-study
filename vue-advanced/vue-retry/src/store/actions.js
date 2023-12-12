@@ -1,4 +1,4 @@
-import { fetchSecondList, fetchThirdList } from '../api/index'
+import { fetchSecondList, fetchThirdList, fetchHocList } from '../api/index'
 
 export default{
     async FETCH_SECOND(context) {
@@ -40,4 +40,13 @@ export default{
         console.log(error)
       }   
     },
+    FETCH_HOC_LIST({commit}, pageName) {
+      fetchHocList(pageName)
+      .then( ({ data }) => {
+        commit('SET_HOC_LIST', data)
+      })
+      .catch(error=>{
+        console.log(error);
+      })
+    }
 }

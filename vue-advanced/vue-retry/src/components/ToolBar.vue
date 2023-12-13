@@ -7,7 +7,8 @@
     <router-link to="/eventbus">eventbus 활용</router-link> |
     <router-link to="/usehoc1">HOC(하이오더컴포넌트) 활용1</router-link> |
     <router-link to="/usehoc2">HOC(하이오더컴포넌트) 활용2</router-link> |
-    <router-link to="/">mixin 활용</router-link>
+    <router-link to="/mixin1">mixin 활용1</router-link> |
+    <router-link to="/mixin2">mixin 활용2</router-link>
   </div>
 </template>
 

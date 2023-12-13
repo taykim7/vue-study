@@ -9,6 +9,8 @@ import ThirdThreeView from '../views/ThirdThreeView.vue'
 import SlotView from '../views/SlotView.vue'
 import EventBusView from '../views/EventBusView.vue'
 import createListView from '../views/HocView.js'
+import Mixin1View from '../views/Mixin1View.vue'
+import Mixin2View from '../views/Mixin2View.vue'
 
 Vue.use(VueRouter);
 
@@ -70,6 +72,16 @@ export const router = new VueRouter({
       name: 'usehoc2',
       //함수 기반 재사용
       component: createListView('HocUseView2'),
+    },
+    {
+      path: '/mixin1',
+      name: 'mixin1',
+      component: Mixin1View,
+    },
+    {
+      path: '/mixin2',
+      name: 'mixin2',
+      component: Mixin2View,
     },
   ]
 })

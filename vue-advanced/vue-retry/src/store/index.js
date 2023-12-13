@@ -17,5 +17,6 @@ export const store = new Vuex.Store({
     two: [],
     three: [],
     hocList: [],
+    mixinList: [],
   },
 })

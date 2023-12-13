@@ -1,4 +1,4 @@
-import { fetchSecondList, fetchThirdList, fetchHocList } from '../api/index'
+import { fetchSecondList, fetchThirdList, fetchHocList, fetchMixinList } from '../api/index'
 
 export default{
     async FETCH_SECOND(context) {
@@ -48,5 +48,14 @@ export default{
       .catch(error=>{
         console.log(error);
       })
-    }
+    },
+    FETCH_MIXIN_LIST({commit}, pageName) {
+      fetchMixinList(pageName)
+      .then( ({ data }) => {
+        commit('SET_MIXIN_LIST', data)
+      })
+      .catch(error=>{
+        console.log(error);
+      })
+    },
 }

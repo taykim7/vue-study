@@ -27,10 +27,19 @@ function fetchHocList(pageName) {
     return axios.get(`${config.baseUrl}ask/1.json`)
   }
 }
+function fetchMixinList(pageName) {
+  console.log(pageName);
+  if (pageName === 'mixin1') {
+    return axios.get(`${config.baseUrl}news/1.json`)
+  } else {
+    return axios.get(`${config.baseUrl}ask/1.json`)
+  }
+}
 
 export {
   fetchFirstList,
   fetchSecondList,
   fetchThirdList,
-  fetchHocList
+  fetchHocList,
+  fetchMixinList,
 }

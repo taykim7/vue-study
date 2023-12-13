@@ -13,5 +13,8 @@ export default {
   },
   SET_HOC_LIST(state, data) {
     state.hocList = data;
-  }
+  },
+  SET_MIXIN_LIST(state, data) {
+    state.mixinList = data;
+  },
 }

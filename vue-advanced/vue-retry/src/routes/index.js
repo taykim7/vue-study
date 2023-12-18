@@ -95,5 +95,10 @@ export const router = new VueRouter({
       name: 'common',
       component: CommonView,
     },
+    {
+      path: '/slot',
+      name: 'slot',
+      component: SlotView,
+    },
   ]
 })

@@ -9,6 +9,7 @@
     <router-link to="/usehoc2">HOC(하이오더컴포넌트) 활용2</router-link> |
     <router-link to="/mixin1">mixin 활용1</router-link> |
     <router-link to="/mixin2">mixin 활용2</router-link>
+    <router-link to="/designpattern">컴포넌트 디자인 패턴</router-link>
   </div>
 </template>
 

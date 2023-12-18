@@ -11,6 +11,7 @@ import EventBusView from '../views/EventBusView.vue'
 import createListView from '../views/HocView.js'
 import Mixin1View from '../views/Mixin1View.vue'
 import Mixin2View from '../views/Mixin2View.vue'
+import DesignPattern from '../views/DesignPattern.vue'
 
 Vue.use(VueRouter);
 
@@ -82,6 +83,11 @@ export const router = new VueRouter({
       path: '/mixin2',
       name: 'mixin2',
       component: Mixin2View,
+    },
+    {
+      path: '/designpattern',
+      name: 'designpattern',
+      component: DesignPattern,
     },
   ]
 })

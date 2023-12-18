@@ -13,6 +13,7 @@ import Mixin1View from '../views/Mixin1View.vue'
 import Mixin2View from '../views/Mixin2View.vue'
 import DesignPattern from '../views/DesignPattern.vue'
 import CommonView from '../views/CommonView.vue'
+import ControlledView from '../views/ControlledView.vue'
 
 Vue.use(VueRouter);
 
@@ -99,6 +100,11 @@ export const router = new VueRouter({
       path: '/slot',
       name: 'slot',
       component: SlotView,
+    },
+    {
+      path: '/controlled',
+      name: 'controlled',
+      component: ControlledView,
     },
   ]
 })

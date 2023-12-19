@@ -14,6 +14,7 @@ import Mixin2View from '../views/Mixin2View.vue'
 import DesignPattern from '../views/DesignPattern.vue'
 import CommonView from '../views/CommonView.vue'
 import ControlledView from '../views/ControlledView.vue'
+import RenderlessView from '../views/RenderlessView.vue'
 
 Vue.use(VueRouter);
 
@@ -105,6 +106,11 @@ export const router = new VueRouter({
       path: '/controlled',
       name: 'controlled',
       component: ControlledView,
+    },
+    {
+      path: '/renderless',
+      name: 'renderless',
+      component: RenderlessView,
     },
   ]
 })

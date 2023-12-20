@@ -1,5 +1,6 @@
 <template>
   <div>
+    <br>
     <design-pattern-list></design-pattern-list>
   </div>
 </template>
@@ -10,7 +11,3 @@ export default {
   components: { DesignPatternList },
 }
 </script>
-
-<style>
-
-</style>

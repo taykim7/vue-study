@@ -5,7 +5,7 @@
         {{ item }}
       </li>
     </ul>
-    <button @click="$emit('renew')">renew items</button>
+    <button @click="$emit('renew')">진화</button>
   </div>
 </template>
 

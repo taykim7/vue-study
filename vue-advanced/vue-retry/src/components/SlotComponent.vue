@@ -1,15 +1,20 @@
 <template>
-  <div>슬롯컴포넌트
-    <slot name="slotTest">
-      <!-- 상위 컴포넌트에서 정의할 영역 -->
-    </slot>
-    <slot name="slotRouterTest">
-      <!-- 상위 컴포넌트에서 정의할 영역 -->
-    </slot>
-    <slot name="slotEmptyTest">
-      <!-- 상위 컴포넌트에서 정의할 영역 -->
-      정의되지않음
-    </slot>
+  <div>
+    <div>
+      <slot name="slotTest">
+        empty
+      </slot>
+    </div>
+    <div>
+      <slot name="slotRouterTest">
+        empty
+      </slot>
+    </div>
+    <div>
+      <slot name="slotEmptyTest">
+        empty
+      </slot>
+    </div>
   </div>
 </template>
 

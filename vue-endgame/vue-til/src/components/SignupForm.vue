@@ -13,21 +13,38 @@
       <input id="nickname" type="text" v-model="nickname">
     </div>
     <button type="submit">가입</button>
+    <p>{{ logMessage }}</p>
   </form>
 </template>
 
 <script>
+import { registerUser } from '@/api/index';
 export default {
   data() {
     return {
       username: '',
       password: '',
       nickname: '',
+      logMessage: '',
     }
   },
   methods: {
-      submitForm() {
-        alert('폼제출')
+      async submitForm() {
+        const userData = {
+          username: this.username,
+          password: this.password,
+          nickname: this.nickname,
+        }
+        // const response = await registerUser(userData); 
+        // Destructuring 구조분해로 더 간단하게
+        const { data } = await registerUser(userData);
+        this.logMessage = `${data.username} 님이 가입되었습니다.`;
+        this.initForm();
+      },
+      initForm() {
+        this.username = '';
+        this.password = '';
+        this.nickname = '';
       }
   }
 }

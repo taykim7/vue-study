@@ -1,8 +1,10 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  // 공통 설정을 미리 넣을 수 있음
-  baseURL: 'http://localhost:3000',
+  // (1)공통 설정을 미리 넣을 수 있음
+  //baseURL: 'http://localhost:3000',
+  // (2) 환경변수 .env 활용
+  baseURL: process.env.VUE_APP_API_URL,
 });
 
 function registerUser(userData) { 

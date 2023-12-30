@@ -8,13 +8,17 @@
       <label for="password">패스워드 : </label>
       <input id="password" type="text" v-model="password"/>
     </div>
-    <button type="submit">로그인</button>
+    <button type="submit" :disabled="!isUserNameValid || !password">
+      로그인
+    </button>
     <p>{{ logMessage }}</p>
   </form>
 </template>
 
 <script>
 import { loginUser } from '@/api/index';
+import { validateEmail } from '@/utils/validation';
+
 
 export default {
   data() {
@@ -22,6 +26,11 @@ export default {
       username: '',
       password: '',
       logMessage: '',
+    }
+  },
+  computed: {
+    isUserNameValid() {
+      return validateEmail(this.username);
     }
   },
   methods: {
@@ -45,7 +54,9 @@ export default {
     initForm() {
       this.username = '';
       this.password = '';
-    } 
+    },
+    
+    
   }
 }
 </script>

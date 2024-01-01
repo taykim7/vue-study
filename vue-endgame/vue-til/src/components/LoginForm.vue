@@ -3,18 +3,25 @@
     <div class="form-wrapper form-wrapper-sm">
       <form @submit.prevent="submitForm" class="form">
         <div>
-          <label for="username">id: </label>
+          <label for="username">id:</label>
           <input id="username" type="text" v-model="username" />
+          <p class="validation-text">
+            <span class="warning" v-if="!isUsernameValid && username">
+              Please enter an email address
+            </span>
+          </p>
         </div>
         <div>
-          <label for="password">pw: </label>
+          <label for="password">pw:</label>
           <input id="password" type="text" v-model="password" />
         </div>
-        <div>
-          <label for="nickname">nickname: </label>
-          <input id="nickname" type="text" v-model="nickname" />
-        </div>
-        <button type="submit" class="btn">회원 가입</button>
+        <button
+          :disabled="!isUsernameValid || !password"
+          type="submit"
+          class="btn"
+        >
+          로그인
+        </button>
       </form>
       <p class="log">{{ logMessage }}</p>
     </div>

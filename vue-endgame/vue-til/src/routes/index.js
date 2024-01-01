@@ -25,6 +25,10 @@ export default new VueRouter({
       component: ()=> import('@/views/SignupPage.vue'),
     },
     {
+      path: '/main',
+      component: ()=> import('@/views/MainPage.vue'),
+    },
+    {
       // 라우터 폴백
       path: '*',
       component: () => import('@/views/NotFoundPage.vue'),

@@ -54,8 +54,9 @@ export default {
           password: this.password,
         };
         const {data} = await loginUser(userData);
-        console.log(data.user.username);
         this.logMessage = `${data.user.username}님 환용해요`
+        // 로그인시 메인페이지로 push
+        this.$router.push('/main');
       } catch (error) {
         // 에러 핸들링 코드
         this.logMessage=`${error.response.data}`

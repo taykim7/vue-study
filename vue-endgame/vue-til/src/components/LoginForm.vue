@@ -41,7 +41,7 @@ export default {
     }
   },
   computed: {
-    isUserNameValid() {
+    isUsernameValid() {
       return validateEmail(this.username);
     }
   },

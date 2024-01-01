@@ -16,6 +16,9 @@ export default new Vuex.Store({
   mutations: {
     setUsername(state, username) { 
       state.username = username;
-    }
+    },
+    clearUserName(state) {
+      state.username = '';
+    },
   }
 });

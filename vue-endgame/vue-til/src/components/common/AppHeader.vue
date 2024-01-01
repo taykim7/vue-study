@@ -9,6 +9,7 @@
       <!-- 로그인 분기1 -->
       <template v-if='isUserLogin'>
         <span>{{ $store.state.username }}</span>
+        <a href="javascript:;" @click="logoutUser">로그아웃</a>
       </template>
       <!-- 로그인 분기2 -->
       <template v-else>
@@ -24,6 +25,12 @@ export default {
   computed: {
     isUserLogin() {
       return this.$store.getters.isLogin
+    }
+  },
+  methods: {
+    logoutUser() {
+      this.$store.commit('clearUsername');
+      this.$router.push('/login');
     }
   }
 }

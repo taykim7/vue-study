@@ -54,7 +54,8 @@ export default {
           password: this.password,
         };
         const {data} = await loginUser(userData);
-        console.log(data)
+        console.log(data.token)
+        this.$store.commit('setToken', data.token);
         this.$store.commit('setUsername', data.user.username);
         // 로그인시 메인페이지로 push
         this.$router.push('/main');

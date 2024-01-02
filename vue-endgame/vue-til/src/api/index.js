@@ -1,11 +1,20 @@
 import axios from 'axios';
+import { setInterceptors } from './common/interceptors';
 
-const instance = axios.create({
-  // (1)공통 설정을 미리 넣을 수 있음
-  //baseURL: 'http://localhost:3000',
-  // (2) 환경변수 .env 활용
-  baseURL: process.env.VUE_APP_API_URL,
-});
+function createInstance() {
+  const instance = axios.create({
+    // (1)공통 설정을 미리 넣을 수 있음
+    //baseURL: 'http://localhost:3000',
+    // (2) 환경변수 .env 활용
+    baseURL: process.env.VUE_APP_API_URL,
+  });
+  
+  // 공통설정을 한 것을 interceptor에 넘김
+  // 넘긴 인스턴스에 intercepotor를 설정하고 다시 return
+  return setInterceptors(instance);
+}
+
+const instance = createInstance();
 
 function registerUser(userData) { 
   // return axios.post('http://localhost:3000/signup', userData);

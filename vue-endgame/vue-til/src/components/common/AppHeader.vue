@@ -3,12 +3,12 @@
     <div>
       <router-link to="/" class="logo">
         TIL
+      <span v-if="isUserLogin">by {{ $store.state.username }}</span>
       </router-link>
     </div>
     <div class="navigations">
       <!-- 로그인 분기1 -->
       <template v-if='isUserLogin'>
-        <span>{{ $store.state.username }}</span>
         <a href="javascript:;" @click="logoutUser">로그아웃</a>
       </template>
       <!-- 로그인 분기2 -->

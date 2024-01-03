@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { setInterceptors } from './common/interceptors';
 
+// 액시오스 초기화 함수
 function createInstance() {
   const instance = axios.create({
     // (1)공통 설정을 미리 넣을 수 있음
@@ -13,15 +14,16 @@ function createInstance() {
   // 넘긴 인스턴스에 intercepotor를 설정하고 다시 return
   return setInterceptors(instance);
 }
-
 const instance = createInstance();
 
+// 회원가입 API
 function registerUser(userData) { 
   // return axios.post('http://localhost:3000/signup', userData);
   // 공통 설정으로 더 단순하게 변경
   return instance.post('signup', userData)
 }
 
+// 로그인 API
 function loginUser(userData) {
   return instance.post('login', userData)
 }

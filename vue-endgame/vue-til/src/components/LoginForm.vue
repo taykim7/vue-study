@@ -29,9 +29,9 @@
 </template>
 
 <script>
-import { loginUser } from '@/api/index';
 import { validateEmail } from '@/utils/validation';
-import { saveAuthToCookie, saveUserToCookie } from '@/utils/cookies';
+// import { loginUser } from '@/api/index';
+// import { saveAuthToCookie, saveUserToCookie } from '@/utils/cookies';
 
 export default {
   data() {
@@ -54,12 +54,17 @@ export default {
           username: this.username,
           password: this.password,
         };
-        const {data} = await loginUser(userData);
-        console.log(data.token)
-        this.$store.commit('setToken', data.token);
-        this.$store.commit('setUsername', data.user.username);
-        saveAuthToCookie(data.token);
-        saveUserToCookie(data.user.username);
+
+        // const {data} = await loginUser(userData);
+        // console.log(data.token)
+        // this.$store.commit('setToken', data.token);
+        // this.$store.commit('setUsername', data.user.username);
+        // saveAuthToCookie(data.token);
+        // saveUserToCookie(data.user.username);
+
+        // action 속성으로 대체
+        await this.$store.dispatch('LOGIN', userData);
+
         // 로그인시 메인페이지로 push
         this.$router.push('/main');
       } catch (error) {

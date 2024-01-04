@@ -29,6 +29,10 @@ export default new VueRouter({
       component: ()=> import('@/views/MainPage.vue'),
     },
     {
+      path: '/add',
+      component: ()=> import('@/views/PostAddPage.vue'),
+    },
+    {
       // 라우터 폴백
       path: '*',
       component: () => import('@/views/NotFoundPage.vue'),

@@ -10,6 +10,7 @@
         <div>
           <label for="contents">Contents: </label>
           <textarea id="contents" type="text" rows="5" v-model="contents"/>
+          <p v-if="!isContentsValid" class="validation-text warning">Text is Toooooo long ({{ this.contents.length }})</p>
         </div>
         <button class="btn" type="submit">생성</button>
       </form>
@@ -29,6 +30,11 @@ export default {
       title: '',
       contents: '',
       logMessage: '',
+    }
+  },
+  computed: {
+    isContentsValid() {
+      return this.contents.length <= 100;
     }
   },
   methods: {

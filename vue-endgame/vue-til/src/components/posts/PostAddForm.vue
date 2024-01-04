@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import { createPost } from '@/api/index';
+
 export default {
   data() {
     return {
@@ -26,8 +28,12 @@ export default {
     }
   },
   methods: {
-    submitForm() {
-      alert('등록요청')
+    async submitForm() {
+      const response = await createPost({
+        title: this.title,
+        contents: this.contents,
+      });
+      console.log(response);
     }
   }
 }

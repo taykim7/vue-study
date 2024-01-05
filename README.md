@@ -1,2 +1,2 @@
 # vue-study
-뷰디졌다
+test

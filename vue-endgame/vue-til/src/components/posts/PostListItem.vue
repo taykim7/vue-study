@@ -26,7 +26,10 @@ export default {
   },
   methods: {
     async deleteItem() {
-      await deletePost(this.postItem._id);
+      if(confirm('진짜 삭제하실?')) {
+        await deletePost(this.postItem._id);
+        this.$emit('refresh');
+      }
     },
   }
 }

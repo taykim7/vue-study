@@ -45,6 +45,8 @@ export default {
           contents: this.contents,
         });
         console.log(response);
+        // 메인 페이지로 이동
+        this.$router.push('/main');
       } catch (error) {
         this.logMessage= error.response.data.message;
       }

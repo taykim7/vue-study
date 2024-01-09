@@ -12,7 +12,7 @@
           <textarea id="contents" type="text" rows="5" v-model="contents"/>
           <p v-if="!isContentsValid" class="validation-text warning">Text is Toooooo long ({{ this.contents.length }})</p>
         </div>
-        <button class="btn" type="submit">생성</button>
+        <button class="btn" type="submit">수정</button>
       </form>
       <p class="log">
         {{ logMessage }}
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { fetchPost } from '@/api/posts';
+import { fetchPost, editPost } from '@/api/posts';
 
 export default {
   data() {
@@ -45,6 +45,17 @@ export default {
   },
   methods: {
     async submitForm() {
+      const id = this.$route.params.id;
+      try {
+        await editPost(id, {
+          title: this.title,
+          contents: this.contents
+      });
+      this.$router.push('/main');
+      } catch (error) {
+        console.log(error);
+        this.logMessage = error;
+      }
     }
   }
 }

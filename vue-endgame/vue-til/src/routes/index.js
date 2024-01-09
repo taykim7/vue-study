@@ -33,6 +33,11 @@ export default new VueRouter({
       component: ()=> import('@/views/PostAddPage.vue'),
     },
     {
+      // Dynamic Route Matching
+      path: '/post/:id',
+      component: ()=> import('@/views/PostEditPage.vue'),
+    },
+    {
       // 라우터 폴백
       path: '*',
       component: () => import('@/views/NotFoundPage.vue'),

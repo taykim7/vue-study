@@ -1,0 +1,60 @@
+<template>
+  <div class="contents">
+    <h1 class="page-header">게시글 수정</h1>
+    <div class="form-wrapper">
+      <form class="form" @submit.prevent="submitForm">
+        <div>
+          <label for="title">Title: </label>
+          <input id="title" type="text" v-model="title">
+        </div>
+        <div>
+          <label for="contents">Contents: </label>
+          <textarea id="contents" type="text" rows="5" v-model="contents"/>
+          <p v-if="!isContentsValid" class="validation-text warning">Text is Toooooo long ({{ this.contents.length }})</p>
+        </div>
+        <button class="btn" type="submit">생성</button>
+      </form>
+      <p class="log">
+        {{ logMessage }}
+      </p>
+    </div>
+  </div>
+</template>
+
+<script>
+import { fetchPost } from '@/api/posts';
+
+export default {
+  data() {
+    return {
+      title: '',
+      contents: '',
+      logMessage: '',
+    }
+  },
+  async created() {
+    const id = this.$route.params.id;
+    const { data } = await fetchPost(id);
+    this.title = data.title;
+    this.contents = data.contents;
+  },
+  computed: {
+    isContentsValid() {
+      return this.contents.length <= 100;
+    }
+  },
+  methods: {
+    async submitForm() {
+    }
+  }
+}
+</script>
+
+<style scoped>
+.form-wrapper .form {
+  width: 100%;
+}
+.btn {
+  color: white;
+}
+</style>

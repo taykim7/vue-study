@@ -23,6 +23,7 @@
 
 <script>
 import { fetchPost, editPost } from '@/api/posts';
+import bus from '@/utils/bus.js';
 
 export default {
   data() {
@@ -47,10 +48,12 @@ export default {
     async submitForm() {
       const id = this.$route.params.id;
       try {
-        await editPost(id, {
+        const response =  await editPost(id, {
           title: this.title,
           contents: this.contents
       });
+      // 토스트
+      bus.$emit('show:toast', `${response.data.title} was editted`);
       this.$router.push('/main');
       } catch (error) {
         console.log(error);

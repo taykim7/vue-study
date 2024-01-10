@@ -26,7 +26,11 @@ export default new Vuex.Store({
     },
     setToken(state, token) {
       state.token = token;
-    }
+    },
+    // 토큰 초기화
+    clearToken(state) {
+      state.token = '';
+    },
   },
   actions: {
     async LOGIN({ commit }, userData) {

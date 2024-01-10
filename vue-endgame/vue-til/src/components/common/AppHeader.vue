@@ -1,7 +1,7 @@
 <template>
   <header>
     <div>
-      <router-link to="/" class="logo">
+      <router-link :to="logoLink" class="logo">
         TIL
       <span v-if="isUserLogin">by {{ $store.state.username }}</span>
       </router-link>
@@ -25,6 +25,10 @@ export default {
   computed: {
     isUserLogin() {
       return this.$store.getters.isLogin
+    },
+    // 로그인 여부에 따라 로고 링크 분기처리
+    logoLink() {
+      return this.$store.getters.isLogin ? '/main' : '/login';
     }
   },
   methods: {

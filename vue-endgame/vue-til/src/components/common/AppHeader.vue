@@ -21,6 +21,8 @@
 </template>
 
 <script>
+import { deleteCookie } from '@/utils/cookies';
+
 export default {
   computed: {
     isUserLogin() {
@@ -33,10 +35,15 @@ export default {
   },
   methods: {
     logoutUser() {
-      this.$store.commit('clearUsername');
+      this.$store.commit('clearUserName');
+      // 토큰 제거
+      this.$store.commit('clearToken');
+      // 쿠키 제거 (인증값, 이름)
+      deleteCookie('til_auth');
+      deleteCookie('til_user');
       this.$router.push('/login');
-    }
-  }
+    },
+  },
 }
 </script>
 

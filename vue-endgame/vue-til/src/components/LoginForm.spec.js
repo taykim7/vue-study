@@ -9,12 +9,17 @@
 //   });
 // });
 
-import Vue from 'vue';
+// import Vue from 'vue';
 import LoginForm from './LoginForm.vue';
+import { shallowMount } from '@vue/test-utils';
 
 describe('LoginForm.vue', () => {
   test('컴포넌트가 마운팅되면 unsername이 존재', () => {
-    const instance = new Vue(LoginForm).$mount();
-    expect(instance.username).toBe('');
+    // const instance = new Vue(LoginForm).$mount();
+    // expect(instance.username).toBe('');
+
+    // test-utils 활용
+    const wrapper = shallowMount(LoginForm);
+    expect(wrapper.vm.username).toBe('');
   });
 });

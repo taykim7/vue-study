@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { registerUser } from '@/api/auth';
+// import { registerUser } from '@/api/auth';
 import { validateEmail } from '@/utils/validation';
 
 export default {
@@ -33,25 +33,28 @@ export default {
       username: '',
       password: '',
       nickname: '',
-      logMessage: '',
     }
   },
   computed: {
     isUserNameValid() {
       return validateEmail(this.username);
+    },
+    logMessage() {
+      return this.$store.state.message;
     }
   },
   methods: {
       async submitForm() {
-        const userData = {
+        try {
+          const userData = {
           username: this.username,
           password: this.password,
           nickname: this.nickname,
         }
-        // const response = await registerUser(userData); 
-        // Destructuring 구조분해로 더 간단하게
-        const { data } = await registerUser(userData);
-        this.logMessage = `${data.username} 님이 가입되었습니다.`;
+        await this.$store.dispatch('REGISTER', userData);
+        } catch (error) {
+          console.log(error);
+        }
         this.initForm();
       },
       initForm() {

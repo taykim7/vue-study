@@ -21,7 +21,8 @@ export default Vue.extend({
     };
   },
   methods: {
-    updateTodoText(value: any) {
+    // 이벤트로 받은 데이터 타입 정의
+    updateTodoText(value: string) {
       this.todoText = value;
     },
     addTodoItem() {

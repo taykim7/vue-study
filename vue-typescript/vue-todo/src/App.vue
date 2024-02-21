@@ -15,6 +15,8 @@
             v-for="(todoItem, index) in todoItems"
             :key="index"
             :todoItem="todoItem"
+            :index="index"
+            @remove="removeTodoItem"
           ></TodoListItem>
         </ul>
       </div>
@@ -78,6 +80,13 @@ export default Vue.extend({
     // 가져오기
     fetchTodoItems() {
       this.todoItems = storage.fetch();
+    },
+    // 삭제하기
+    removeTodoItem(index: number) {
+      console.log("remove", index);
+      // 삭제하고 저장하기
+      this.todoItems.splice(index, 1);
+      storage.save(this.todoItems);
     },
   },
   created() {

@@ -42,7 +42,8 @@ const storage = {
     localStorage.setItem(STORAGE_KEY, parsed);
   },
   // 가져오기
-  fetch() {
+  // 반환 타입은 Todo[]
+  fetch(): Todo[] {
     // 로컬스토리지에서 불러오기
     const todoItems = localStorage.getItem(STORAGE_KEY) || "[]";
     const result = JSON.parse(todoItems);
@@ -89,7 +90,17 @@ export default Vue.extend({
     },
     // 가져오기
     fetchTodoItems() {
-      this.todoItems = storage.fetch();
+      // fetch메서드 반환타입을 정의해주니 타입 에러가 사라짐
+      this.todoItems = storage.fetch().sort((a, b) => {
+        // 정렬할 대상의 속성으로 접근
+        if (a.title < b.title) {
+          return -1;
+        }
+        if (a.title > b.title) {
+          return 1;
+        }
+        return 0;
+      });
     },
     // 삭제하기
     removeTodoItem(index: number) {

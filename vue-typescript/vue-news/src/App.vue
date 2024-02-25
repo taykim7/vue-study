@@ -32,7 +32,7 @@ export default Vue.extend({
       this.loading = false;
     },
   },
-  created() {
+  async created() {
     bus.$on("on:progress", this.onProgress);
     bus.$on("off:progress", this.offProgress);
   },

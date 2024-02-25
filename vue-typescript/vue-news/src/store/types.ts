@@ -3,6 +3,7 @@ import { CommitOptions, DispatchOptions, Store } from "vuex";
 import { Mutations } from "./mutations";
 import { RootState } from "./state";
 import { Actions } from "./actions";
+import { Getters } from "./getters";
 
 // 기본적으로 정의되어 있는 class에 commit을 재정의하기 위한 타입 정의
 // - key를 받고 그 key의 두 번째 파라미터(payload)를 가져오겠다.
@@ -23,10 +24,21 @@ type MyActions = {
   ): ReturnType<Actions[K]>;
 };
 
+// 맵드 타입으로 모든 속성의 key로 정의 (반환타입도 해당 key로)
+type MyGetters = {
+  getters: {
+    [K in keyof Getters]: ReturnType<Getters[K]>;
+  };
+};
+
 // Mystore 타입을 export
-export type MyStore = Omit<Store<RootState>, "commit" | "dispatch"> &
+export type MyStore = Omit<
+  Store<RootState>,
+  "commit" | "dispatch" | "getters"
+> &
   MyMutations &
-  MyActions;
+  MyActions &
+  MyGetters;
 
 // Omit은 특정 타입에서 지정된 속성만 제거한 타입을 정의해 줍니다.
 // &는 속성 합집합

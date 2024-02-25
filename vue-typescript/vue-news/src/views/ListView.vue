@@ -4,18 +4,19 @@
   </div>
 </template>
 
-<script>
-import { fetchNews } from "@/api";
+<script lang="ts">
+import Vue from "vue";
+import { fetchNews, NewsItem } from "@/api";
 import ListItem from "../components/ListItem.vue";
 
-export default {
+export default Vue.extend({
   components: {
     ListItem,
   },
 
   data() {
     return {
-      newsItems: [],
+      newsItems: [] as NewsItem[],
     };
   },
 
@@ -29,7 +30,7 @@ export default {
   created() {
     this.fetchNewsItmes();
   },
-};
+});
 </script>
 
 <style></style>

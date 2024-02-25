@@ -28,28 +28,39 @@
           }}</router-link>
         </small>
         <small v-if="news.time_ago" class="link-text">
-          {{ news.time_ago }}
+          <!-- {{ news.time_ago.concat(", 2024") }} -->
+          {{ timeAgo(news) }}
         </small>
       </div>
     </li>
   </ul>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from "vue";
+import { PropType } from "vue/types/v3-component-props";
+import { NewsItem } from "@/api";
+
+export default Vue.extend({
   props: {
     items: {
-      type: Array,
+      type: Array as PropType<NewsItem[]>,
       required: true,
     },
   },
 
   computed: {
-    // listItems() {
+    // listItems(): any {
     //   return this.$store.getters.fetchedList;
     // },
   },
-};
+
+  methods: {
+    timeAgo(news: NewsItem): string {
+      return news.time_ago.concat(", 2024");
+    },
+  },
+});
 </script>
 
 <style scoped>

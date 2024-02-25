@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosPromise } from "axios";
 
 const api = {
   news: "https://api.hnpwa.com/v0/news/1.json",
@@ -8,7 +8,20 @@ const api = {
   item: "https://api.hnpwa.com/v0/item/",
 };
 
-function fetchNews() {
+export interface NewsItem {
+  id: number;
+  title: string;
+  points: number;
+  user: string;
+  time: number;
+  time_ago: string;
+  comments_count: number;
+  type: string;
+  url: string;
+  domain: string;
+}
+
+function fetchNews(): AxiosPromise<NewsItem[]> {
   return axios.get(api.news);
 }
 

@@ -29,7 +29,7 @@ export default new VueRouter({
         //   .then(() => next())
         //   .catch(() => new Error("failed to fetch news items"));
         try {
-          await store.dispatch("FETCH_LIST", routeTo.name);
+          // await store.dispatch("FETCH_LIST", routeTo.name);
           next();
         } catch (error) {
           new Error("failed to fetch news items");

@@ -8,7 +8,6 @@ import Vue from "vue";
 import { Chart, registerables } from "chart.js";
 
 Chart.register(...registerables);
-
 export default Vue.extend({
   mounted() {
     const ctx = (
@@ -16,7 +15,7 @@ export default Vue.extend({
     ).getContext("2d");
 
     if (ctx) {
-      const myChart = new Chart(ctx, {
+      const myChart = new this.$_Chart(ctx, {
         type: "bar",
         data: {
           labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],

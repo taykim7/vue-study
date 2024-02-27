@@ -1,18 +1,29 @@
 <template>
   <div>
-    <canvas id="myChart" width="400" height="400"></canvas>
+    <canvas id="myChart" ref="myChart" width="400" height="400"></canvas>
   </div>
 </template>
 <script lang="ts">
-import Vue from "vue";
+import Vue, { VueConstructor } from "vue";
 import { Chart, registerables } from "chart.js";
+import { MyVueRefs } from "./types/index";
 
 Chart.register(...registerables);
-export default Vue.extend({
+// export default (
+//   Vue as VueConstructor<Vue & { $refs: { myChart: HTMLCanvasElement } }>
+// ).extend({
+export default (Vue as MyVueRefs<{ myChart: HTMLCanvasElement }>).extend({
   mounted() {
-    const ctx = (
-      document.getElementById("myChart") as HTMLCanvasElement
-    ).getContext("2d");
+    // const ctx = (
+    //   document.getElementById("myChart") as HTMLCanvasElement
+    // ).getContext("2d");
+    // ### 전역으로 dom을 접근하기보다 컴포넌트 내에서 특정 dom 정보를 접근할 때는 ref를 사용하는게 좋다.
+    // const canvasElement = this.$refs.myChart as HTMLCanvasElement;
+    // ### ts에서 ref를 사용하면 ref속성을 타입 추론, 단언 해줘야하는 번거로움이 있음
+    const canvasElement = this.$refs.myChart;
+    // ### ref 속성 타입 정의로 사라짐 (12 line)
+    const ctx = canvasElement.getContext("2d");
+    // ### 근데 매번 저렇게 정의를 해야하니 반복적임
 
     if (ctx) {
       const myChart = new this.$_Chart(ctx, {

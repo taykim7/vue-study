@@ -4,7 +4,8 @@
   </div>
 </template>
 <script lang="ts">
-import Vue, { VueConstructor } from "vue";
+import Vue from "vue";
+// import { VueConstructor } from "vue";
 import { Chart, registerables } from "chart.js";
 import { MyVueRefs } from "./types/index";
 
@@ -14,16 +15,20 @@ Chart.register(...registerables);
 // ).extend({
 export default (Vue as MyVueRefs<{ myChart: HTMLCanvasElement }>).extend({
   mounted() {
+    // ### 1. 전역으로 dom을 접근하기보다 컴포넌트 내에서 특정 dom 정보를 접근할 때는 ref를 사용하는게 좋다.
     // const ctx = (
     //   document.getElementById("myChart") as HTMLCanvasElement
     // ).getContext("2d");
-    // ### 전역으로 dom을 접근하기보다 컴포넌트 내에서 특정 dom 정보를 접근할 때는 ref를 사용하는게 좋다.
-    // const canvasElement = this.$refs.myChart as HTMLCanvasElement;
-    // ### ts에서 ref를 사용하면 ref속성을 타입 추론, 단언 해줘야하는 번거로움이 있음
+
+    // ### 2. ts에서 ref를 사용하면 ref속성을 타입 추론, 단언 해줘야하는 번거로움이 있다.
+    // const canvasElement = this.$refs.myChart as HTMLCanvasElement; // ==> 사용할때마다 단언해줘야함
+
+    // ### 3. vue.extend 부분에 ref 속성 타입을 확장해준다. (13 line)
     const canvasElement = this.$refs.myChart;
-    // ### ref 속성 타입 정의로 사라짐 (12 line)
-    const ctx = canvasElement.getContext("2d");
-    // ### 근데 매번 저렇게 정의를 해야하니 반복적임
+    const ctx = canvasElement.getContext("2d"); // ==> 이제 as 어쩌구 안해도 myChart는 HTMLCanvasElement이다.
+
+    // ### 4. 근데 매번 이렇게 extend에 확장해야하니 너무 번거롭다. 유틸타입으로 만들자 (types/index.ts)
+    // 제네릭타입, 유틸타입, 함수같은 타입으로 타입확장하여 16 line 보면 나름 심플해졌다.
 
     if (ctx) {
       const myChart = new this.$_Chart(ctx, {

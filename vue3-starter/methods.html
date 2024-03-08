@@ -1,0 +1,22 @@
+<div id="app">
+  <h1>{{ count }}</h1>
+  <button @click="addCount">버튼</button>
+</div>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+  Vue.createApp({
+    // 자바스크립트는 일급객체라서 속성에 함수를 연결이 가능!
+    data: function() {
+      return {
+        // 리액티비티가 주입된다.
+        count: 0
+      }
+    },
+    methods: {
+      // addCount: fucntion() {}
+      addCount() {
+        this.count += 1;
+      }
+    }
+  }).mount('#app');
+</script>

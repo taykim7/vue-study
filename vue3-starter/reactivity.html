@@ -1,0 +1,28 @@
+<div id="app"></div>
+<script>
+  const data = {
+    message: '안녕하세요'
+  }
+
+  function render(text) {
+    // div 태그에 접근
+    var div = document.querySelector('#app');
+    div.innerHTML = text;
+  }
+
+  // new Proxy(데이터, {해당 데이터의 동작})
+  const app = new Proxy(data, {
+    get() {
+      // 객체의 속성에 접근할때마다 동작
+      console.log('접근');
+    },
+    set(target, prop, newValue) {
+      // 객체의 속성 값 갱신
+      console.log('갱신');
+      console.log(target); // {message: '안녕하세요'}
+      console.log(prop); // message
+      target[prop] = newValue;
+      render(newValue);
+    }
+  })
+</script>

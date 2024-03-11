@@ -1,0 +1,30 @@
+<style>
+  .primary {
+    color: red;
+  }
+</style>
+
+<div id="app">
+  <h1>클래스 바인딩</h1>
+  <div :class="textClass">데이터 바인딩</div>
+
+  <h1>아이디 바인딩</h1>
+  <section :id="sectionId" :style="setcionStyle">반가워용</section>
+</div>
+
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<script>
+  Vue.createApp({
+    data() {
+      return {
+        textClass: 'primary',
+        sectionId: 'tab1',
+        setcionStyle: { color: 'blue' },
+      }
+    },
+    methods: {
+    }
+  }).mount('#app');
+</script>

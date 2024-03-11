@@ -1,0 +1,22 @@
+<div id="app">
+  <p v-if="login">로그인 되었음</p>
+  <p v-else>로그인 하세용</p>
+  <button @click="loginUser">로그인</button>
+</div>
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<script>
+  Vue.createApp({
+    data() {
+      return {
+        login: false,
+      }
+    },
+    methods: {
+      loginUser() {
+        this.login = !this.login;
+      }
+    }
+  }).mount('#app');
+</script>

@@ -1,0 +1,19 @@
+<div id="app">
+  <app-header :title="appTitle"></app-header>
+</div>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+  Vue.createApp({
+    data() {
+      return {
+        appTitle: '프롭스 넘기기'
+      }
+    },
+    components: {
+      'app-header': {
+        template: '<h1>{{ title }}</h1>',
+        props: ['title']
+      }
+    },
+  }).mount('#app');
+</script>

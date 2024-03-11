@@ -1,0 +1,49 @@
+<div id="app">
+  <app-header :app-Title="message"></app-header>
+  <app-contents @login="tryLogin"></app-contents>
+</div>
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<script>
+  
+  // 컴포넌트1
+  var appHeader = {
+    props: ['appTitle'],
+    template: `
+      <h1>{{ appTitle }}</h1>
+    `,
+  }
+  
+  // 컴포넌트2
+  var appContents = {
+    template: `
+      <p>
+        <button @click="tryLogin">로그인</button>
+      </p>
+    `,
+    methods: {
+      tryLogin() {
+        this.$emit('login');
+      }
+    }
+  }
+
+  // roooot
+  Vue.createApp({
+    data() {
+      return {
+        message: ''
+      }
+    },
+    components: {
+      'app-header': appHeader,
+      'app-contents': appContents,
+    },
+    methods: {
+      tryLogin() {
+        this.message = '로그인 되었따'
+      }
+    }
+  }).mount('#app');
+</script>

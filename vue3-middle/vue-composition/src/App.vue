@@ -1,26 +1,43 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <p>{{ message }}</p>
+    <button @click="changeMessage">번역</button>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import { ref } from 'vue';
+import { useMessage } from './hooks/useMessage';
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  export default {
+    // data() {
+    //   return {
+    //     message: '안녕'
+    //   }
+    // },
+    // methods: {
+    //   changeMessage() {
+    //     this.message = 'Hi'
+    //   } 
+    // }   
+    setup() {
+      // // data의 역할
+      // const message = ref('안녕');
+      // // methods의 역할 (함수 선언문)
+      // function changeMessage() {
+      //   message.value = 'Hi';
+      // }
+
+      // 컴포저블로 코드 재사용
+      const { message, changeMessage } = useMessage();
+      return {
+        message,
+        changeMessage
+      }
+    } 
   }
-}
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss" scoped>
+
 </style>

@@ -8,17 +8,21 @@
 <script>
 import { ref } from 'vue'
 export default {
-  setup() {
+  setup(props, context) {
     // data
     const todoInput = ref('');
     const addTodo = () => {
       const todo = todoInput.value;
-      // key value 동일하게 저장
-      localStorage.setItem(todo, todo);
+      // setup에서의 $emit
+      context.emit('add', todo);
+      clearTodo();
     }
+    const clearTodo = () => todoInput.value = '';
     // methods
     return {
-      todoInput, addTodo
+      todoInput,
+      addTodo,
+      clearTodo
     }
   },
 }

@@ -5,35 +5,21 @@
 </template>
 
 <script>
-import { onBeforeMount, ref } from 'vue'
+import { onBeforeMount } from 'vue';
 import TodoHeader from './components/TodoHeader.vue'
 import TodoInput from './components/TodoInput.vue'
 import TodoList from './components/TodoList.vue'
+import { useTodo } from './hooks/useTodo';
 export default {
   components: { TodoHeader, TodoInput, TodoList },
 
   setup() {
-    const todoItems = ref([]);
+    const { todoItems, addTodo, fetchTodos } = useTodo();
 
-    const fetchTodos = () => {
-      const result = [];
-      for (let i = 0; i < localStorage.length; i++) {
-        const todoItem = localStorage.key(i);
-        result.push(todoItem);
-      }
-      return result;
-    }
-
-    // 라이프 사이클 API
-    // 명시적으로 라이프 사이클 API 적용 (컴포넌트가 DOM에 부착되기 전)
+    // Lifecycle
     onBeforeMount(() => {
       todoItems.value = fetchTodos();
     })
-
-    function addTodo(todo) {
-      todoItems.value.push(todo);
-      localStorage.setItem(todo, todo);
-    }
 
     return {
       todoItems, addTodo

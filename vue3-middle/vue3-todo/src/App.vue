@@ -1,5 +1,5 @@
 <template>
-  <TodoHeader></TodoHeader>
+  <TodoHeader :appTitle="title"></TodoHeader>
   <TodoInput @add="addTodo"></TodoInput>
   <TodoList :todoItems="todoItems" @remove="removeTodo"></TodoList>
 </template>
@@ -40,6 +40,11 @@ export default {
       // setup 내부 데이터는 data()에 접근한 것 처럼 this를 활용
       this.todoItems.splice(index, 1);
       localStorage.removeItem(item);
+    }
+  },
+  data() {
+    return {
+      title: '할 일'
     }
   }
 }

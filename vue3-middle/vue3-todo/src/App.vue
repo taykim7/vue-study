@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { onBeforeMount, ref } from 'vue'
 import TodoHeader from './components/TodoHeader.vue'
 import TodoInput from './components/TodoInput.vue'
 import TodoList from './components/TodoList.vue'
@@ -23,7 +23,12 @@ export default {
       }
       return result;
     }
-    todoItems.value = fetchTodos();
+
+    // 라이프 사이클 API
+    // 명시적으로 라이프 사이클 API 적용 (컴포넌트가 DOM에 부착되기 전)
+    onBeforeMount(() => {
+      todoItems.value = fetchTodos();
+    })
 
     function addTodo(todo) {
       todoItems.value.push(todo);

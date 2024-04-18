@@ -1,5 +1,6 @@
 <template>
-	<label>
+	<!-- 다중루트노드 -->
+	<label class="form-label" id="child-id">
 		{{ label }}
 		<!-- v-model 활용 -->
 		<!-- <input v-model="username" type="text" /> -->
@@ -8,8 +9,8 @@
 			@input="event => $emit('update:modelValue', event.target.value)"
 			type="text"
 		/> -->
-		<input v-model="value" type="text" />
 	</label>
+	<input v-model="value" type="text" class="form-control" />
 </template>
 
 <script>

@@ -1,15 +1,15 @@
 <template>
 	<main>
-		<LifecycleHooks></LifecycleHooks>
+		<TemplateRefs></TemplateRefs>
 	</main>
 </template>
 
 <script>
-import LifecycleHooks from './LifecycleHooks.vue';
+import TemplateRefs from './TemplateRefs.vue';
 
 export default {
 	components: {
-		LifecycleHooks,
+		TemplateRefs,
 	},
 	setup() {
 		return {};

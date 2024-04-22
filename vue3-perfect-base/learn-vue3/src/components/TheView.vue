@@ -1,15 +1,15 @@
 <template>
 	<main>
-		<ProvideInject></ProvideInject>
+		<LifecycleHooks></LifecycleHooks>
 	</main>
 </template>
 
 <script>
-import ProvideInject from './ProvideInject.vue';
+import LifecycleHooks from './LifecycleHooks.vue';
 
 export default {
 	components: {
-		ProvideInject,
+		LifecycleHooks,
 	},
 	setup() {
 		return {};

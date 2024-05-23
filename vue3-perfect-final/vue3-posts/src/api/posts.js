@@ -10,3 +10,8 @@ const posts = [
 export function getPosts() {
 	return posts;
 }
+
+// 가상의 api
+export function getPostById(id) {
+	return posts.find(item => item.id === parseInt(id));
+}

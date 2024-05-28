@@ -30,8 +30,23 @@ import { useRouter } from 'vue-router';
 
 const router = useRouter();
 const posts = ref([]);
-const fetchPosts = () => {
-	posts.value = getPosts();
+const fetchPosts = async () => {
+	// getPosts()
+	// 	.then(response => {
+	// 		console.log(response);
+	// 	})
+	// 	.catch(error => {
+	// 		console.log('error: ', error);
+	// 	});
+
+	try {
+		// data를 post에 가져오기
+		const { data } = await getPosts();
+		// ({ data: posts.value } = await getPosts()); // 다른 표현 방법
+		posts.value = data;
+	} catch (error) {
+		console.log(error);
+	}
 };
 fetchPosts();
 

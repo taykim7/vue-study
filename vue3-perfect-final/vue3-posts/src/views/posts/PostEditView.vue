@@ -2,14 +2,24 @@
 	<div>
 		<h2>게시글 수정</h2>
 		<hr class="my-4" />
-		<form @submit.prevent>
+		<form @submit.prevent="edit">
 			<div class="mb-3">
 				<label for="title" class="form-label">Email address</label>
-				<input type="text" class="form-control" id="title" />
+				<input
+					type="text"
+					v-model="form.title"
+					class="form-control"
+					id="title"
+				/>
 			</div>
 			<div class="mb-3">
 				<label for="content" class="form-label">Example textarea</label>
-				<textarea class="form-control" id="content" rows="3"></textarea>
+				<textarea
+					v-model="form.content"
+					class="form-control"
+					id="content"
+					rows="3"
+				></textarea>
 			</div>
 			<div class="pt-4">
 				<button
@@ -26,11 +36,49 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
+import { getPostById, updatePost } from '@/api/posts';
 
 const route = useRoute();
 const router = useRouter();
 const id = route.params.id;
+
+const form = ref({
+	title: null,
+	content: null,
+});
+
+const fetchPost = async () => {
+	try {
+		const { data } = await getPostById(id);
+		// 객체복사 (주소값을 참조해서 데이터가 변경되도 함께 변함)
+		setForm(data);
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+// 원하는 데이터만 받도록 설정
+const setForm = ({ title, content, createdAt }) => {
+	form.value.title = title;
+	form.value.content = content;
+	form.value.createdAt = createdAt;
+};
+
+fetchPost();
+
+// 수정
+const edit = async () => {
+	try {
+		// 수정
+		await updatePost(id, { ...form.value });
+		// 수정 후 바로 상세 페이지
+		router.push({ name: 'PostDetail', params: { id } });
+	} catch (error) {
+		console.log(error);
+	}
+};
 
 const goDetailPage = () => router.push({ name: 'PostDetail', params: { id } });
 </script>

@@ -30,6 +30,13 @@ import { useRouter } from 'vue-router';
 
 const router = useRouter();
 const posts = ref([]);
+// 정렬추가
+const params = ref({
+	// 등록일 기준 내림차순
+	_sort: 'createdAt',
+	_order: 'desc',
+});
+
 const fetchPosts = async () => {
 	// getPosts()
 	// 	.then(response => {
@@ -41,7 +48,7 @@ const fetchPosts = async () => {
 
 	try {
 		// data를 post에 가져오기
-		const { data } = await getPosts();
+		const { data } = await getPosts(params.value);
 		// ({ data: posts.value } = await getPosts()); // 다른 표현 방법
 		posts.value = data;
 	} catch (error) {

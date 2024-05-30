@@ -42,7 +42,7 @@ import { ref } from 'vue';
 // 기존에 route.params로 가져온 id는 주석처리
 
 const props = defineProps({
-	id: Number,
+	id: String,
 });
 
 // const route = useRoute();

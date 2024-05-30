@@ -42,8 +42,8 @@ const routes = [
 		name: 'PostDetail',
 		component: PostDetailView,
 		// 라우트 컴포넌트에 속성 전달 허용 → id가 해당 컴포넌트에 props로 전달
-		// props: true,
-		props: route => ({ id: route.params.id }),
+		props: true,
+		// props: route => ({ id: route.params.id }),
 		// props: route => {
 		// 	return {
 		// 		id: route.params.id,

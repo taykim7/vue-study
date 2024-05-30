@@ -59,7 +59,7 @@
 		<hr class="my-5" />
 		<AppCard>
 			<!-- router의 파라미터에 의존적이었지만 props: true 라우터 설정으로 속성을 전달할 수 있게 되었따 -->
-			<PostDetailView :id="1"></PostDetailView>
+			<PostDetailView id="1"></PostDetailView>
 		</AppCard>
 	</div>
 </template>

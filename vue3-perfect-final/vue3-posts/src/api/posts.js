@@ -1,4 +1,5 @@
-import axios from 'axios';
+// import axios from 'axios';
+import { posts } from '.';
 
 // axios로 json 데이터 조회
 
@@ -13,25 +14,27 @@ import axios from 'axios';
 
 // 목록
 export function getPosts(params) {
-	return axios.get('http://localhost:5000/posts', { params });
+	// axios 모듈화
+	// return axios.get('http://localhost:5000/posts', { params });
+	return posts.get('/', { params });
 }
 
 // 조회
 export function getPostById(id) {
-	return axios.get(`http://localhost:5000/posts/${id}`);
+	return posts.get(id);
 }
 
 // 등록
 export function createPost(data) {
-	return axios.post(`http://localhost:5000/posts/`, data);
+	return posts.post(`/`, data);
 }
 
 // 수정
 export function updatePost(id, data) {
-	return axios.put(`http://localhost:5000/posts/${id}`, data);
+	return posts.put(id, data);
 }
 
 // 삭제
 export function deletePost(id) {
-	return axios.delete(`http://localhost:5000/posts/${id}`);
+	return posts.delete(`/${id}`);
 }

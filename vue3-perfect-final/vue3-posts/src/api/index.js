@@ -16,6 +16,11 @@ function create(baseURL, options) {
 }
 
 // post api
-export const posts = create('http://localhost:5000/posts/');
+// export const posts = create('http://localhost:5000/posts/');
+// 환경변수 활용
+export const posts = create(`${import.meta.env.VITE_APP_API_URL}posts/`);
 
 // 다른 api를 여기에 추가하면 된다.
+
+// development http://localhost:5000/posts/
+// production : http://localhost:5001/posts/

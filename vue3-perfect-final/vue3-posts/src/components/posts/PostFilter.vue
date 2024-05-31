@@ -30,7 +30,7 @@ defineProps({
 	title: String,
 	limit: Number,
 });
-defineEmits('update:title', 'update:limit');
+defineEmits(['update:title', 'update:limit']);
 </script>
 
 <style lang="scss" scoped></style>

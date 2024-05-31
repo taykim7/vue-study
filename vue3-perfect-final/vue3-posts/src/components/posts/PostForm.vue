@@ -33,7 +33,7 @@ defineProps({
 	title: String,
 	content: String,
 });
-defineEmits('update:title', 'update:content');
+defineEmits(['update:title', 'update:content']);
 </script>
 
 <style lang="scss" scoped></style>

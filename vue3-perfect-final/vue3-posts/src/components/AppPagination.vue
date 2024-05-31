@@ -48,7 +48,7 @@ const props = defineProps({
 		required: true,
 	},
 });
-defineEmits('page');
+defineEmits(['page']);
 
 const isPrevPage = computed(() => ({ disabled: !(props.currentPage > 1) }));
 const isNextPage = computed(() => ({

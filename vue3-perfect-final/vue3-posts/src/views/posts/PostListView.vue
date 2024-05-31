@@ -27,40 +27,18 @@
 				></PostItem>
 			</div>
 		</div>
-		<nav class="mt-5" aria-label="Page navigation example">
-			<ul class="pagination justify-content-center">
-				<li class="page-item">
-					<a
-						class="page-link"
-						:class="{ disabled: !(params._page > 1) }"
-						href="#"
-						@click.prevent="params._page--"
-						>Previous</a
-					>
-				</li>
-				<li
-					v-for="page in pageCount"
-					:key="page"
-					class="page-item"
-					:class="{ active: params._page === page }"
-				>
-					<a class="page-link" href="#" @click.prevent="params._page = page">{{
-						page
-					}}</a>
-				</li>
-				<li
-					class="page-item"
-					:class="{ disabled: !(params._page < pageCount) }"
-				>
-					<a class="page-link" href="#" @click.prevent="params._page++">Next</a>
-				</li>
-			</ul>
-		</nav>
+		<AppPagination
+			:current-page="params._page"
+			:page-count="pageCount"
+			@page="page => (params._page = page)"
+		></AppPagination>
 		<hr class="my-5" />
-		<AppCard>
-			<!-- router의 파라미터에 의존적이었지만 props: true 라우터 설정으로 속성을 전달할 수 있게 되었따 -->
-			<PostDetailView id="1"></PostDetailView>
-		</AppCard>
+		<templae v-if="posts && posts.length > 0">
+			<AppCard>
+				<!-- router의 파라미터에 의존적이었지만 props: true 라우터 설정으로 속성을 전달할 수 있게 되었따 -->
+				<PostDetailView :id="1"></PostDetailView>
+			</AppCard>
+		</templae>
 	</div>
 </template>
 
@@ -68,6 +46,7 @@
 import PostItem from '@/components/posts/PostItem.vue';
 import PostDetailView from '@/views/posts/PostDetailView.vue';
 import AppCard from '@/components/AppCard.vue';
+import AppPagination from '@/components/AppPagination.vue';
 import { getPosts } from '@/api/posts';
 import { ref, computed, watchEffect } from 'vue';
 import { useRouter } from 'vue-router';

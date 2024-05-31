@@ -21,7 +21,7 @@ export function getPosts(params) {
 
 // 조회
 export function getPostById(id) {
-	return posts.get(id);
+	return posts.get(`${id}`);
 }
 
 // 등록
@@ -31,7 +31,7 @@ export function createPost(data) {
 
 // 수정
 export function updatePost(id, data) {
-	return posts.put(id, data);
+	return posts.put(`${id}`, data);
 }
 
 // 삭제

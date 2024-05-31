@@ -17,16 +17,16 @@
 			</div>
 		</form>
 		<hr class="my-4" />
-		<div class="row g-3">
-			<div v-for="post in posts" :key="post.id" class="col-4">
+		<AppGrid :items="posts">
+			<template v-slot="{ item }">
 				<PostItem
-					:title="post.title"
-					:content="post.content"
-					:created-at="post.createdAt"
-					@click="goPage(post.id)"
+					:title="item.title"
+					:content="item.content"
+					:created-at="item.createdAt"
+					@click="goPage(item.id)"
 				></PostItem>
-			</div>
-		</div>
+			</template>
+		</AppGrid>
 		<AppPagination
 			:current-page="params._page"
 			:page-count="pageCount"
@@ -47,6 +47,8 @@ import PostItem from '@/components/posts/PostItem.vue';
 import PostDetailView from '@/views/posts/PostDetailView.vue';
 import AppCard from '@/components/AppCard.vue';
 import AppPagination from '@/components/AppPagination.vue';
+import AppGrid from '@/components/AppGrid.vue';
+
 import { getPosts } from '@/api/posts';
 import { ref, computed, watchEffect } from 'vue';
 import { useRouter } from 'vue-router';

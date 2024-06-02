@@ -31,7 +31,8 @@ export function createPost(data) {
 
 // 수정
 export function updatePost(id, data) {
-	return posts.put(`${id}`, data);
+	// return posts.put(`${id}`, data);
+	return posts.patch(`${id}`, data);
 }
 
 // 삭제

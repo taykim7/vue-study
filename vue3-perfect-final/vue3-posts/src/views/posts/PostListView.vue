@@ -16,6 +16,7 @@
 					:content="item.content"
 					:created-at="item.createdAt"
 					@click="goPage(item.id)"
+					@modal="openModal(item)"
 				></PostItem>
 			</template>
 		</AppGrid>
@@ -24,6 +25,30 @@
 			:page-count="pageCount"
 			@page="page => (params._page = page)"
 		></AppPagination>
+
+		<AppModal :show="show" :title="'게시글입니다'" @close="closeModal">
+			<template #default>
+				<div class="row g-3">
+					<div class="col-3 text-muted">제목</div>
+					<div class="col-9">{{ modalTitle }}</div>
+					<div class="col-3 text-muted">내용</div>
+					<div class="col-9">{{ modalContent }}</div>
+					<div class="col-3 text-muted">등록일</div>
+					<div class="col-9">{{ modalCreatedAt }}</div>
+				</div>
+			</template>
+			<template #actions>
+				<button
+					type="button"
+					class="btn btn-secondary"
+					data-bs-dismiss="modal"
+					@click="closeModal"
+				>
+					닫기
+				</button>
+			</template></AppModal
+		>
+
 		<hr class="my-5" />
 		<template v-if="posts && posts.length > 0">
 			<AppCard>
@@ -41,6 +66,7 @@ import AppCard from '@/components/AppCard.vue';
 import AppPagination from '@/components/AppPagination.vue';
 import AppGrid from '@/components/AppGrid.vue';
 import PostFilter from '@/components/posts/PostFilter.vue';
+import AppModal from '@/components/AppModal.vue';
 
 import { getPosts } from '@/api/posts';
 import { ref, computed, watchEffect } from 'vue';
@@ -105,6 +131,22 @@ const goPage = id => {
 		// hash: '안녕하쇼',
 	});
 };
+
+// modal
+const show = ref(false);
+const openModal = ({ title, content, createdAt }) => {
+	show.value = true;
+	modalTitle.value = title;
+	modalContent.value = content;
+	modalCreatedAt.value = createdAt;
+};
+const closeModal = () => {
+	show.value = false;
+};
+
+const modalTitle = ref('');
+const modalContent = ref('');
+const modalCreatedAt = ref('');
 </script>
 
 <style lang="scss" scoped></style>

@@ -26,16 +26,19 @@
 			@page="page => (params._page = page)"
 		></AppPagination>
 
-		<PostModal
-			v-model="show"
-			:title="'modalTitle'"
-			:content="modalContent"
-			:created-at="modalCreatedAt"
-		>
-		</PostModal>
+		<!-- 모달을 저 멀리 보내자 -->
+		<Teleport to="#modal">
+			<PostModal
+				v-model="show"
+				:title="'modalTitle'"
+				:content="modalContent"
+				:created-at="modalCreatedAt"
+			>
+			</PostModal>
+		</Teleport>
 
-		<hr class="my-5" />
 		<template v-if="posts && posts.length > 0">
+			<hr class="my-5" />
 			<AppCard>
 				<!-- router의 파라미터에 의존적이었지만 props: true 라우터 설정으로 속성을 전달할 수 있게 되었따 -->
 				<PostDetailView :id="1"></PostDetailView>

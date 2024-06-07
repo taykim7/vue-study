@@ -3,8 +3,18 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
+import funcPlugins from './plugins/func';
+import objPlugins from './plugins/obj';
+import person from './plugins/person';
 
-createApp(App).use(router).mount('#app');
+const app = createApp(App);
+app.use(router);
+// 작성한 플러그인 등록
+app.use(funcPlugins);
+app.use(objPlugins, { name: 'tay' });
+app.use(person, { name: '수정한이름' });
+
+app.mount('#app');
 import 'bootstrap/dist/js/bootstrap.js';
 
 // Vite의 환경변수 접근

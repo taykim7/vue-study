@@ -1,5 +1,5 @@
-import focus from './focus';
-import color from './color';
+import focus from '../directives/focus';
+import color from '../directives/color';
 
 export default {
 	install(app) {

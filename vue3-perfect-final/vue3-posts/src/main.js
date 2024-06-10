@@ -8,7 +8,7 @@ import objPlugins from './plugins/obj';
 import person from './plugins/person';
 import globalComponents from './plugins/global-components';
 // import focus from './directives/focus';
-import globalDirectives from './directives/global-directives';
+import globalDirectives from './plugins/global-directives';
 
 const app = createApp(App);
 

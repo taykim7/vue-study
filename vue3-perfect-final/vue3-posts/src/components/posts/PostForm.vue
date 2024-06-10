@@ -4,6 +4,7 @@
 			<div class="mb-3">
 				<label for="title" class="form-label">제목</label>
 				<input
+					v-focus
 					:value="title"
 					@input="$emit('update:title', $event.target.value)"
 					type="text"
@@ -29,6 +30,12 @@
 </template>
 
 <script setup>
+// script setup 내에서 커스텀 디렉티브 직접 등록
+const vFocus = {
+	mounted: el => {
+		el.focus();
+	},
+};
 defineProps({
 	title: String,
 	content: String,

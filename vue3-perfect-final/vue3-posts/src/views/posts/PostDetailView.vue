@@ -5,7 +5,9 @@
 		<p>hash는 {{ $route.hash }}</p> -->
 		<h2>{{ post.title }}</h2>
 		<p>{{ post.content }}</p>
-		<p class="text-muted">{{ post.createdAt }}</p>
+		<p class="text-muted">
+			{{ $dayjs(post.createdAt).format('YYYY. MM. DD HH:mm') }}
+		</p>
 		<hr class="my-4" />
 		<div class="row g-2">
 			<div class="col-auto">

@@ -14,7 +14,8 @@ app.use(router);
 app.use(funcPlugins);
 app.use(objPlugins, { name: 'tay' });
 app.use(person, { name: '수정한이름' });
-// 글로벌컴포넌트 등록
+
+// 플러그인화한 여러 컴포넌트 전역 등록
 app.use(globalComponents);
 
 app.mount('#app');

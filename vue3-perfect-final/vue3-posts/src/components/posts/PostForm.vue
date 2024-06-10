@@ -31,11 +31,11 @@
 
 <script setup>
 // script setup 내에서 커스텀 디렉티브 직접 등록
-const vFocus = {
-	mounted: el => {
-		el.focus();
-	},
-};
+// const vFocus = {
+// 	mounted: el => {
+// 		el.focus();
+// 	},
+// };
 defineProps({
 	title: String,
 	content: String,

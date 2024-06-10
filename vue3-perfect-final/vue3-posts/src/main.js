@@ -7,8 +7,13 @@ import funcPlugins from './plugins/func';
 import objPlugins from './plugins/obj';
 import person from './plugins/person';
 import globalComponents from './plugins/global-components';
+import focus from './directives/focus';
 
 const app = createApp(App);
+
+// 커스텀 디렉티브 전역 등록
+app.directive('focus', focus);
+
 app.use(router);
 // 작성한 플러그인 등록
 app.use(funcPlugins);

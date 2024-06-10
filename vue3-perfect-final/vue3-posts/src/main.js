@@ -9,6 +9,7 @@ import person from './plugins/person';
 import globalComponents from './plugins/global-components';
 // import focus from './directives/focus';
 import globalDirectives from './plugins/global-directives';
+import dayjs from './plugins/dayjs';
 
 const app = createApp(App);
 
@@ -20,6 +21,7 @@ app.use(router);
 app.use(funcPlugins);
 app.use(objPlugins, { name: 'tay' });
 app.use(person, { name: '수정한이름' });
+app.use(dayjs);
 
 // 플러그인화한 여러 컴포넌트 전역 등록
 app.use(globalComponents);

@@ -7,12 +7,13 @@ import funcPlugins from './plugins/func';
 import objPlugins from './plugins/obj';
 import person from './plugins/person';
 import globalComponents from './plugins/global-components';
-import focus from './directives/focus';
+// import focus from './directives/focus';
+import globalDirectives from './directives/global-directives';
 
 const app = createApp(App);
 
 // 커스텀 디렉티브 전역 등록
-app.directive('focus', focus);
+// app.directive('focus', focus);
 
 app.use(router);
 // 작성한 플러그인 등록
@@ -22,6 +23,9 @@ app.use(person, { name: '수정한이름' });
 
 // 플러그인화한 여러 컴포넌트 전역 등록
 app.use(globalComponents);
+
+// 플러그인화한 여러 커스텀 디렉티브 전역 등록
+app.use(globalDirectives);
 
 app.mount('#app');
 import 'bootstrap/dist/js/bootstrap.js';

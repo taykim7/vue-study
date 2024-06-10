@@ -3,7 +3,7 @@
 		<h5 class="card-title">{{ title }}</h5>
 		<p class="card-text">{{ content }}</p>
 		<p class="card-muted">
-			{{ createdAt }}
+			{{ createdDate }}
 		</p>
 		<template #footer>
 			<div class="d-flex flex-row-reverse">
@@ -16,9 +16,10 @@
 </template>
 
 <script setup>
+import { inject, computed } from 'vue';
 // import AppCard from '@/components/AppCard.vue';
 
-defineProps({
+const props = defineProps({
 	title: {
 		type: String,
 		required: true,
@@ -32,6 +33,12 @@ defineProps({
 });
 
 defineEmits(['modal']);
+
+// provide로 제공한 라이브러리를 주입
+const dayjs = inject('dayjs');
+const createdDate = computed(() =>
+	dayjs(props.createdAt).format('YYYY. MM. DD HH:mm'),
+);
 </script>
 
 <style lang="scss" scoped></style>

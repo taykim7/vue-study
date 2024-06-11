@@ -70,7 +70,7 @@ const edit = async () => {
 		await updatePost(id, { ...form.value });
 		// 수정 후 바로 상세 페이지
 		// router.push({ name: 'PostDetail', params: { id } });
-		vAlert('수정이 완료되었습니다.', 'success');
+		vSuccess('수정이 완료되었습니다.');
 	} catch (error) {
 		console.log(error);
 		vAlert(error.message);
@@ -95,6 +95,7 @@ const vAlert = (message, type = 'error') => {
 		alerts.value.shift();
 	}, 2000);
 };
+const vSuccess = message => vAlert(message, 'success');
 </script>
 
 <style lang="scss" scoped></style>

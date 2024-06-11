@@ -18,6 +18,7 @@
 				<button class="btn btn-primary">저장</button>
 			</template>
 		</PostForm>
+		<AppAlert :items="alerts"></AppAlert>
 	</div>
 </template>
 
@@ -42,12 +43,23 @@ const save = async () => {
 			createdAt: Date.now(),
 		});
 		// 등록이 성공되면 리스트로 이동
-		router.push({ name: 'PostList' });
+		// router.push({ name: 'PostList' });
+		vSuccess('등록이 완료되었습니다.');
 	} catch (error) {
 		console.log(error);
 	}
 };
 const goListPage = () => router.push({ name: 'PostList' });
+
+// alert
+const alerts = ref([]);
+const vAlert = (message, type = 'error') => {
+	alerts.value.push({ message, type });
+	setTimeout(() => {
+		alerts.value.shift();
+	}, 2000);
+};
+const vSuccess = message => vAlert(message, 'success');
 </script>
 
 <style lang="scss" scoped></style>

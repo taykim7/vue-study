@@ -23,7 +23,6 @@
 			:message="alertMessage"
 			:type="alertType"
 		></AppAlert> -->
-		<AppAlert :items="alerts"></AppAlert>
 	</div>
 </template>
 
@@ -35,7 +34,7 @@ import PostForm from '@/components/posts/PostForm.vue';
 // import AppAlert from '@/components/AppAlert.vue';
 import { useAlert } from '@/composables/alert';
 
-const { alerts, vAlert, vSuccess } = useAlert();
+const { vAlert, vSuccess } = useAlert();
 
 const route = useRoute();
 const router = useRouter();
@@ -72,7 +71,7 @@ const edit = async () => {
 		// 수정
 		await updatePost(id, { ...form.value });
 		// 수정 후 바로 상세 페이지
-		// router.push({ name: 'PostDetail', params: { id } });
+		router.push({ name: 'PostDetail', params: { id } });
 		vSuccess('수정이 완료되었습니다.');
 	} catch (error) {
 		console.log(error);

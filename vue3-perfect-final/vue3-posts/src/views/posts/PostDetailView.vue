@@ -3,7 +3,7 @@
 	<AppLoading v-if="loading"></AppLoading>
 
 	<!-- 데이터 조회 실패 -->
-	<AppError v-else-if="error" :message="'Error!!!'"></AppError>
+	<AppError v-else-if="error" :message="error.message"></AppError>
 
 	<div v-else>
 		<!-- <p>params는 {{ $route.params }}</p>

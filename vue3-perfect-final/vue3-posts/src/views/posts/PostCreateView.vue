@@ -2,6 +2,7 @@
 	<div>
 		<h2>게시글 등록</h2>
 		<hr class="my-4" />
+		<AppError v-if="error" :message="error.message"></AppError>
 		<PostForm
 			v-model:title="form.title"
 			v-model:content="form.content"
@@ -15,7 +16,17 @@
 				>
 					목록
 				</button>
-				<button class="btn btn-primary">저장</button>
+
+				<button class="btn btn-primary" :disabled="loading">
+					<template v-if="loading">
+						<span
+							class="spinner-border spinner-border-sm"
+							aria-hidden="true"
+						></span>
+						<span class="visually-hidden" role="status">Loading...</span>
+					</template>
+					<template v-else>저장</template>
+				</button>
 			</template>
 		</PostForm>
 	</div>
@@ -27,6 +38,7 @@ import { useRouter } from 'vue-router';
 import { createPost } from '@/api/posts';
 import PostForm from '@/components/posts/PostForm.vue';
 import { useAlert } from '@/composables/alert';
+import AppError from '@/components/app/AppError.vue';
 
 const { vAlert, vSuccess } = useAlert();
 
@@ -35,10 +47,12 @@ const form = ref({
 	title: null,
 	content: null,
 });
-
+const loading = ref(false);
+const error = ref(null);
 // 저장
 const save = async () => {
 	try {
+		loading.value = true;
 		// 생성api
 		await createPost({
 			...form.value,
@@ -47,9 +61,11 @@ const save = async () => {
 		// 등록이 성공되면 리스트로 이동
 		router.push({ name: 'PostList' });
 		vSuccess('등록이 완료되었습니다.');
-	} catch (error) {
-		console.log(error);
-		vAlert(error.message);
+	} catch (err) {
+		vAlert(err.message);
+		error.value = err;
+	} finally {
+		loading.value = false;
 	}
 };
 const goListPage = () => router.push({ name: 'PostList' });

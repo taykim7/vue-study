@@ -75,8 +75,7 @@ import AppError from '@/components/app/AppError.vue';
 
 const router = useRouter();
 const posts = ref([]);
-const error = ref(null);
-const loading = ref(false);
+
 // 데이터 조회 필터
 const params = ref({
 	// (1) 정렬 기준 등록일 기준, 내림차순
@@ -95,6 +94,11 @@ const pageCount = computed(() =>
 	Math.ceil(totalCount.value / params.value._limit),
 );
 
+// 데이터 조회 로딩, 에러
+const loading = ref(false);
+const error = ref(null);
+
+// 데이터 조회
 const fetchPosts = async () => {
 	// getPosts()
 	// 	.then(response => {

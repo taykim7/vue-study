@@ -15,6 +15,7 @@
 			{{ $dayjs(post.createdAt).format('YYYY. MM. DD HH:mm') }}
 		</p>
 		<hr class="my-4" />
+		<!-- 데이터 삭제 실패 -->
 		<AppError v-if="removeError" :message="removeError.message"></AppError>
 		<div class="row g-2">
 			<div class="col-auto">
@@ -38,6 +39,7 @@
 					@click="remove"
 					:disabled="removeLoading"
 				>
+					<!-- 데이터 삭제 중 -->
 					<template v-if="removeLoading">
 						<span
 							class="spinner-border spinner-border-sm"
@@ -89,6 +91,7 @@ const post = ref({});
 // form.title = data.title;
 // form.content = data.content;
 
+// 데이터 조회 로딩, 에러
 const loading = ref(false);
 const error = ref(null);
 
@@ -114,8 +117,10 @@ const setPost = ({ title, content, createdAt }) => {
 
 fetchPost();
 
+// 데이터 삭제 로딩, 에러
 const removeError = ref(null);
 const removeLoading = ref(false);
+
 // 제거
 const remove = async () => {
 	try {
@@ -133,6 +138,7 @@ const remove = async () => {
 		removeLoading.value = false;
 	}
 };
+
 const goListPage = () => router.push({ name: 'PostList' });
 const goEditPage = () =>
 	router.push({ name: 'PostEdit', params: { id: props.id } });

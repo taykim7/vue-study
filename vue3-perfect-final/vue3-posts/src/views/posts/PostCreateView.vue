@@ -2,6 +2,7 @@
 	<div>
 		<h2>게시글 등록</h2>
 		<hr class="my-4" />
+		<!-- 데이터 등록 실패 -->
 		<AppError v-if="error" :message="error.message"></AppError>
 		<PostForm
 			v-model:title="form.title"
@@ -18,6 +19,7 @@
 				</button>
 
 				<button class="btn btn-primary" :disabled="loading">
+					<!-- 데이터 등록 중 -->
 					<template v-if="loading">
 						<span
 							class="spinner-border spinner-border-sm"
@@ -47,8 +49,11 @@ const form = ref({
 	title: null,
 	content: null,
 });
+
+// 데이터 등록 로딩, 에러
 const loading = ref(false);
 const error = ref(null);
+
 // 저장
 const save = async () => {
 	try {

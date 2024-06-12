@@ -9,6 +9,7 @@
 		<h2>게시글 수정</h2>
 		<hr class="my-4" />
 
+		<!-- 데이터 수정 실패 -->
 		<AppError v-if="editError" :message="editError.message"></AppError>
 		<PostForm
 			v-model:title="form.title"
@@ -24,6 +25,7 @@
 					취소
 				</button>
 				<button class="btn btn-primary" :disabled="editLoading">
+					<!-- 데이터 수정 중 -->
 					<template v-if="editLoading">
 						<span
 							class="spinner-border spinner-border-sm"
@@ -65,10 +67,9 @@ const form = ref({
 	content: null,
 });
 
+// 데이터 조회 로딩, 에러
 const loading = ref(false);
 const error = ref(null);
-const editLoading = ref(false);
-const editError = ref(null);
 
 const fetchPost = async () => {
 	try {
@@ -92,6 +93,10 @@ const setForm = ({ title, content, createdAt }) => {
 };
 
 fetchPost();
+
+// 데이터 수정 로딩, 에러
+const editLoading = ref(false);
+const editError = ref(null);
 
 // 수정
 const edit = async () => {

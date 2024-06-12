@@ -15,6 +15,7 @@
 			{{ $dayjs(post.createdAt).format('YYYY. MM. DD HH:mm') }}
 		</p>
 		<hr class="my-4" />
+		<AppError v-if="removeError" :message="removeError.message"></AppError>
 		<div class="row g-2">
 			<div class="col-auto">
 				<button class="btn btn-outline-dark">이전글</button>
@@ -32,7 +33,20 @@
 				</button>
 			</div>
 			<div class="col-auto">
-				<button class="btn btn-outline-danger" @click="remove">삭제</button>
+				<button
+					class="btn btn-outline-danger"
+					@click="remove"
+					:disabled="removeLoading"
+				>
+					<template v-if="removeLoading">
+						<span
+							class="spinner-border spinner-border-sm"
+							aria-hidden="true"
+						></span>
+						<span class="visually-hidden" role="status">Loading...</span>
+					</template>
+					<template v-else>삭제</template>
+				</button>
 			</div>
 		</div>
 	</div>
@@ -100,9 +114,12 @@ const setPost = ({ title, content, createdAt }) => {
 
 fetchPost();
 
+const removeError = ref(null);
+const removeLoading = ref(false);
 // 제거
 const remove = async () => {
 	try {
+		removeLoading.value = true;
 		// 안티패턴 - 뎁스가 깊어지지 않도록(컨벤션에 따라 다름)
 		// 다른 예로 ! 를 === true 이런식으로 교체 가능 (훨씬 직관적이니까)
 		if (confirm('삭제할래?') === false) {
@@ -110,8 +127,10 @@ const remove = async () => {
 		}
 		await deletePost(props.id);
 		router.push({ name: 'PostList' });
-	} catch (error) {
-		console.log(error);
+	} catch (err) {
+		removeError.value = err;
+	} finally {
+		removeLoading.value = false;
 	}
 };
 const goListPage = () => router.push({ name: 'PostList' });

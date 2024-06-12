@@ -1,5 +1,11 @@
 <template>
-	<div>
+	<!-- 데이터 조회 중 -->
+	<AppLoading v-if="loading"></AppLoading>
+
+	<!-- 데이터 조회 실패 -->
+	<AppError v-else-if="error" :message="'Error!!!'"></AppError>
+
+	<div v-else>
 		<!-- <p>params는 {{ $route.params }}</p>
 		<p>query는 {{ $route.query }}</p>
 		<p>hash는 {{ $route.hash }}</p> -->
@@ -40,6 +46,9 @@ import {
 import { getPostById, deletePost } from '@/api/posts';
 import { ref } from 'vue';
 
+import AppLoading from '@/components/app/AppLoading.vue';
+import AppError from '@/components/app/AppError.vue';
+
 // props: true 라우터 설정으로 props를 받아옴
 // 기존에 route.params로 가져온 id는 주석처리
 
@@ -66,13 +75,19 @@ const post = ref({});
 // form.title = data.title;
 // form.content = data.content;
 
+const loading = ref(false);
+const error = ref(null);
+
 const fetchPost = async () => {
 	try {
+		loading.value = true;
 		const { data } = await getPostById(props.id);
 		// 객체복사 (주소값을 참조해서 데이터가 변경되도 함께 변함)
 		setPost(data);
-	} catch (error) {
-		console.log(error);
+	} catch (err) {
+		error.value = err;
+	} finally {
+		loading.value = false;
 	}
 };
 

@@ -1,5 +1,11 @@
 <template>
-	<div>
+	<!-- 데이터 조회 중 -->
+	<AppLoading v-if="loading"></AppLoading>
+
+	<!-- 데이터 조회 실패 -->
+	<AppError v-else-if="error" :message="'Error!!!'"></AppError>
+
+	<div v-else>
 		<h2>게시글 수정</h2>
 		<hr class="my-4" />
 		<PostForm
@@ -34,6 +40,9 @@ import PostForm from '@/components/posts/PostForm.vue';
 // import AppAlert from '@/components/AppAlert.vue';
 import { useAlert } from '@/composables/alert';
 
+import AppLoading from '@/components/app/AppLoading.vue';
+import AppError from '@/components/app/AppError.vue';
+
 const { vAlert, vSuccess } = useAlert();
 
 const route = useRoute();
@@ -45,14 +54,20 @@ const form = ref({
 	content: null,
 });
 
+const loading = ref(false);
+const error = ref(null);
+
 const fetchPost = async () => {
 	try {
+		loading.value = true;
 		const { data } = await getPostById(id);
 		// 객체복사 (주소값을 참조해서 데이터가 변경되도 함께 변함)
 		setForm(data);
-	} catch (error) {
-		console.log(error);
-		vAlert(error.message);
+	} catch (err) {
+		vAlert(err.message);
+		error.value = err;
+	} finally {
+		loading.value = false;
 	}
 };
 

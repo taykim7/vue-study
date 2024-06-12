@@ -9,22 +9,32 @@
 		></PostFilter>
 
 		<hr class="my-4" />
-		<AppGrid :items="posts">
-			<template v-slot="{ item }">
-				<PostItem
-					:title="item.title"
-					:content="item.content"
-					:created-at="item.createdAt"
-					@click="goPage(item.id)"
-					@modal="openModal(item)"
-				></PostItem>
-			</template>
-		</AppGrid>
-		<AppPagination
-			:current-page="params._page"
-			:page-count="pageCount"
-			@page="page => (params._page = page)"
-		></AppPagination>
+
+		<!-- 데이터 조회 중 -->
+		<AppLoading v-if="loading"></AppLoading>
+
+		<!-- 데이터 조회 실패 -->
+		<AppError v-else-if="error" :message="'Error!!!'"></AppError>
+
+		<!-- 데이터 조회 성공 -->
+		<template v-else>
+			<AppGrid :items="posts">
+				<template v-slot="{ item }">
+					<PostItem
+						:title="item.title"
+						:content="item.content"
+						:created-at="item.createdAt"
+						@click="goPage(item.id)"
+						@modal="openModal(item)"
+					></PostItem>
+				</template>
+			</AppGrid>
+			<AppPagination
+				:current-page="params._page"
+				:page-count="pageCount"
+				@page="page => (params._page = page)"
+			></AppPagination>
+		</template>
 
 		<!-- 모달을 저 멀리 보내자 -->
 		<Teleport to="#modal">
@@ -60,8 +70,13 @@ import { getPosts } from '@/api/posts';
 import { ref, computed, watchEffect } from 'vue';
 import { useRouter } from 'vue-router';
 
+import AppLoading from '@/components/app/AppLoading.vue';
+import AppError from '@/components/app/AppError.vue';
+
 const router = useRouter();
 const posts = ref([]);
+const error = ref(null);
+const loading = ref(false);
 // 데이터 조회 필터
 const params = ref({
 	// (1) 정렬 기준 등록일 기준, 내림차순
@@ -90,14 +105,17 @@ const fetchPosts = async () => {
 	// 	});
 
 	try {
+		loading.value = true;
 		// data를 post에 가져오기
 		const { data, headers } = await getPosts(params.value);
 		// ({ data: posts.value } = await getPosts()); // 다른 표현 방법
 		posts.value = data;
 		totalCount.value = headers['x-total-count'];
 		console.log(pageCount.value);
-	} catch (error) {
-		console.log(error);
+	} catch (err) {
+		error.value = err;
+	} finally {
+		loading.value = false;
 	}
 };
 

@@ -48,13 +48,14 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-import { getPostById, updatePost } from '@/api/posts';
+import { updatePost } from '@/api/posts';
 import PostForm from '@/components/posts/PostForm.vue';
 // import AppAlert from '@/components/AppAlert.vue';
 import { useAlert } from '@/composables/alert';
 
 import AppLoading from '@/components/app/AppLoading.vue';
 import AppError from '@/components/app/AppError.vue';
+import { useAxios } from '@/hooks/useAxios';
 
 const { vAlert, vSuccess } = useAlert();
 
@@ -62,37 +63,8 @@ const route = useRoute();
 const router = useRouter();
 const id = route.params.id;
 
-const form = ref({
-	title: null,
-	content: null,
-});
-
-// 데이터 조회 로딩, 에러
-const loading = ref(false);
-const error = ref(null);
-
-const fetchPost = async () => {
-	try {
-		loading.value = true;
-		const { data } = await getPostById(id);
-		// 객체복사 (주소값을 참조해서 데이터가 변경되도 함께 변함)
-		setForm(data);
-	} catch (err) {
-		vAlert(err.message);
-		error.value = err;
-	} finally {
-		loading.value = false;
-	}
-};
-
-// 원하는 데이터만 받도록 설정
-const setForm = ({ title, content, createdAt }) => {
-	form.value.title = title;
-	form.value.content = content;
-	form.value.createdAt = createdAt;
-};
-
-fetchPost();
+// axios 컴포저블 함수 적용
+const { error, loading, data: form } = useAxios(`/posts/${id}`);
 
 // 데이터 수정 로딩, 에러
 const editLoading = ref(false);

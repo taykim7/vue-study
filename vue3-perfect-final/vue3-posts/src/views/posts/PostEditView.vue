@@ -46,9 +46,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-import { updatePost } from '@/api/posts';
 import PostForm from '@/components/posts/PostForm.vue';
 // import AppAlert from '@/components/AppAlert.vue';
 import { useAlert } from '@/composables/alert';
@@ -66,25 +64,29 @@ const id = route.params.id;
 // axios 컴포저블 함수 적용
 const { error, loading, data: form } = useAxios(`/posts/${id}`);
 
-// 데이터 수정 로딩, 에러
-const editLoading = ref(false);
-const editError = ref(null);
+const {
+	error: editError,
+	loading: editLoading,
+	execute,
+} = useAxios(
+	`/posts/${id}`,
+	{ method: 'patch' },
+	{
+		immediate: false,
+		onSuccess: () => {
+			vSuccess('수정이 완료되었습니다.');
+			router.push({ name: 'PostDetail', params: { id } });
+		},
+		onError: err => {
+			vAlert(err.message);
+		},
+	},
+);
 
-// 수정
-const edit = async () => {
-	try {
-		editLoading.value = true;
-		// 수정
-		await updatePost(id, { ...form.value });
-		// 수정 후 바로 상세 페이지
-		router.push({ name: 'PostDetail', params: { id } });
-		vSuccess('수정이 완료되었습니다.');
-	} catch (err) {
-		vAlert(err.message);
-		editError.value = err;
-	} finally {
-		editLoading.value = false;
-	}
+const edit = () => {
+	execute({
+		...form.value,
+	});
 };
 
 const goDetailPage = () => router.push({ name: 'PostDetail', params: { id } });

@@ -59,11 +59,10 @@ import {
 	// useRoute,
 	useRouter,
 } from 'vue-router';
-import { deletePost } from '@/api/posts';
-import { ref } from 'vue';
 import AppLoading from '@/components/app/AppLoading.vue';
 import AppError from '@/components/app/AppError.vue';
 import { useAxios } from '@/hooks/useAxios';
+import { useAlert } from '@/composables/alert';
 
 // props: true 라우터 설정으로 props를 받아옴
 // 기존에 route.params로 가져온 id는 주석처리
@@ -88,27 +87,34 @@ const router = useRouter();
 
 // axios 컴포저블 함수 적용
 const { error, loading, data: post } = useAxios(`/posts/${props.id}`);
+const { vAlert, vSuccess } = useAlert();
 
-// 데이터 삭제 로딩, 에러
-const removeError = ref(null);
-const removeLoading = ref(false);
+const {
+	error: removeError,
+	loading: removeLoading,
+	execute,
+} = useAxios(
+	`/posts/${props.id}`,
+	{ mehtod: 'delete' },
+	{
+		immediate: false,
+		onSuccess: () => {
+			vSuccess('삭제가 완료되었습니다');
+		},
+		onError: err => {
+			vAlert(err.message);
+		},
+	},
+);
 
 // 제거
-const remove = async () => {
-	try {
-		removeLoading.value = true;
-		// 안티패턴 - 뎁스가 깊어지지 않도록(컨벤션에 따라 다름)
-		// 다른 예로 ! 를 === true 이런식으로 교체 가능 (훨씬 직관적이니까)
-		if (confirm('삭제할래?') === false) {
-			return;
-		}
-		await deletePost(props.id);
-		router.push({ name: 'PostList' });
-	} catch (err) {
-		removeError.value = err;
-	} finally {
-		removeLoading.value = false;
+const remove = () => {
+	// 안티패턴 - 뎁스가 깊어지지 않도록(컨벤션에 따라 다름)
+	// 다른 예로 ! 를 === true 이런식으로 교체 가능 (훨씬 직관적이니까)
+	if (confirm('삭제할래?') === false) {
+		return;
 	}
+	execute();
 };
 
 const goListPage = () => router.push({ name: 'PostList' });

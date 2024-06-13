@@ -60,21 +60,15 @@
 <script setup>
 import PostItem from '@/components/posts/PostItem.vue';
 import PostDetailView from '@/views/posts/PostDetailView.vue';
-// import AppCard from '@/components/AppCard.vue';
-// import AppPagination from '@/components/AppPagination.vue';
-// import AppGrid from '@/components/AppGrid.vue';
 import PostFilter from '@/components/posts/PostFilter.vue';
 import PostModal from '@/components/posts/PostModal.vue';
-
-import { getPosts } from '@/api/posts';
-import { ref, computed, watchEffect } from 'vue';
+import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
-
 import AppLoading from '@/components/app/AppLoading.vue';
 import AppError from '@/components/app/AppError.vue';
+import { useAxios } from '@/hooks/useAxios';
 
 const router = useRouter();
-const posts = ref([]);
 
 // 데이터 조회 필터
 const params = ref({
@@ -88,57 +82,31 @@ const params = ref({
 	// (4) 타이틀 필터
 	title_like: '',
 });
+
+// axios 컴포저블 함수 적용
+// 데이터 조회 ('get'은 디폴트라 생략)
+// 데이터 조회필터(params) 전달
+// 가져온 data는 posts에 할당
+const {
+	response,
+	data: posts,
+	error,
+	loading,
+} = useAxios('/posts', { params });
+
 // pagination - 페이지 수 = 전체개수/조회개수 (올림)
-const totalCount = ref(0);
+const totalCount = computed(() => response.value.headers['x-total-count']);
 const pageCount = computed(() =>
 	Math.ceil(totalCount.value / params.value._limit),
 );
 
-// 데이터 조회 로딩, 에러
-const loading = ref(false);
-const error = ref(null);
-
-// 데이터 조회
-const fetchPosts = async () => {
-	// getPosts()
-	// 	.then(response => {
-	// 		console.log(response);
-	// 	})
-	// 	.catch(error => {
-	// 		console.log('error: ', error);
-	// 	});
-
-	try {
-		loading.value = true;
-		// data를 post에 가져오기
-		const { data, headers } = await getPosts(params.value);
-		// ({ data: posts.value } = await getPosts()); // 다른 표현 방법
-		posts.value = data;
-		totalCount.value = headers['x-total-count'];
-		console.log(pageCount.value);
-	} catch (err) {
-		error.value = err;
-	} finally {
-		loading.value = false;
-	}
-};
-
-// 페이지 변경시 새로 호출 (반응형 데이터 변경 시 새로 호출)
-// watch와 다르게 초기 1번 바로 실행함
-watchEffect(fetchPosts);
-
 const goPage = id => {
-	// router.push(`/posts/${id}`);
 	console.log(typeof id);
 	router.push({
 		name: 'PostDetail',
 		params: {
 			id,
 		},
-		// query: {
-		// 	searchText: '안녕',
-		// },
-		// hash: '안녕하쇼',
 	});
 };
 

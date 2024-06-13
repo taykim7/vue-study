@@ -9,10 +9,14 @@ const defaultsConfig = {
 	method: 'get',
 };
 
+const defaultOptions = {
+	immediate: true,
+};
+
 // ○ useAxios 함수 정의
 // (1) 외부로부터 받는 파라미터는 url, config
 // (2) config는 구조분해 할당을 위해 빈객체를 디폴트로 설정 (undefined로 넘어오면 에러방지)
-export const useAxios = (url, config = {}) => {
+export const useAxios = (url, config = {}, options = {}) => {
 	// (3) 공통적으로 사용할 상태들
 	// (4) header를 전달하기 위해 response를 통째로 전달한다.
 	const response = ref(null);
@@ -20,11 +24,13 @@ export const useAxios = (url, config = {}) => {
 	const loading = ref(false);
 	const error = ref(null);
 
+	const { onSuccess, onError, immediate } = { ...defaultOptions, ...options };
+
 	// (5) ref 반응형 객체인 config의 params
 	const { params } = config;
 
 	// ○ 내부 execute 함수 정의
-	const execute = () => {
+	const execute = body => {
 		// (6) 데이터 초기화
 		data.value = null;
 		error.value = null;
@@ -39,15 +45,24 @@ export const useAxios = (url, config = {}) => {
 			...defaultsConfig,
 			...config,
 			params: unref(params),
+			data: typeof body === 'object' ? body : {},
 		})
 			.then(res => {
 				// 호출 성공
 				response.value = res;
 				data.value = res.data;
+				// 성공할때 호출할 콜백함수
+				if (onSuccess) {
+					onSuccess(res);
+				}
 			})
 			.catch(err => {
 				// 호출 실패
 				error.value = err;
+				// 실패할때 호출할 콜백함수
+				if (onError) {
+					onError(err);
+				}
 			})
 			.finally(() => {
 				loading.value = false;
@@ -63,7 +78,9 @@ export const useAxios = (url, config = {}) => {
 		watchEffect(execute);
 	} else {
 		// (12) 아니라면 한번만 호출
-		execute();
+		if (immediate) {
+			execute();
+		}
 	}
 
 	return {
@@ -71,5 +88,6 @@ export const useAxios = (url, config = {}) => {
 		data,
 		error,
 		loading,
+		execute,
 	};
 };

@@ -59,11 +59,11 @@ import {
 	// useRoute,
 	useRouter,
 } from 'vue-router';
-import { getPostById, deletePost } from '@/api/posts';
+import { deletePost } from '@/api/posts';
 import { ref } from 'vue';
-
 import AppLoading from '@/components/app/AppLoading.vue';
 import AppError from '@/components/app/AppError.vue';
+import { useAxios } from '@/hooks/useAxios';
 
 // props: true 라우터 설정으로 props를 받아옴
 // 기존에 route.params로 가져온 id는 주석처리
@@ -86,36 +86,8 @@ const router = useRouter();
  * reactive는 레퍼런스만 가능
  */
 
-const post = ref({});
-// const form = reactive({});
-// form.title = data.title;
-// form.content = data.content;
-
-// 데이터 조회 로딩, 에러
-const loading = ref(false);
-const error = ref(null);
-
-const fetchPost = async () => {
-	try {
-		loading.value = true;
-		const { data } = await getPostById(props.id);
-		// 객체복사 (주소값을 참조해서 데이터가 변경되도 함께 변함)
-		setPost(data);
-	} catch (err) {
-		error.value = err;
-	} finally {
-		loading.value = false;
-	}
-};
-
-// 원하는 데이터만 받도록 설정 (다른 데이터로 문제가 생길 수 있으니!)
-const setPost = ({ title, content, createdAt }) => {
-	post.value.title = title;
-	post.value.content = content;
-	post.value.createdAt = createdAt;
-};
-
-fetchPost();
+// axios 컴포저블 함수 적용
+const { error, loading, data: post } = useAxios(`/posts/${props.id}`);
 
 // 데이터 삭제 로딩, 에러
 const removeError = ref(null);

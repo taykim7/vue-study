@@ -50,7 +50,11 @@ const form = ref({
 	content: null,
 });
 
-// 데이터 등록 로딩, 에러
+// axios 컴포저블 함수 적용
+// 에러 & 로딩 상태, 실행 함수* 가져오기
+// url(/posts)과 config전달
+// config의 method는 post로 설정
+// options으로는 즉시 실행은 안하고, 호출 성공 및 실패시 호출할 콜백함수 전달.
 const { error, loading, execute } = useAxios(
 	'/posts',
 	{
@@ -68,7 +72,7 @@ const { error, loading, execute } = useAxios(
 		},
 	},
 );
-// 저장
+// '저장' 버튼 클릭시 execute 함수를 통해 저장 api 호출
 const save = async () => {
 	execute({ ...form.value, createdAt: Date.now() });
 };

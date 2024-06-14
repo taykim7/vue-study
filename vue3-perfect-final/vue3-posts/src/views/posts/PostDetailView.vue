@@ -85,10 +85,18 @@ const router = useRouter();
  * reactive는 레퍼런스만 가능
  */
 
-// axios 컴포저블 함수 적용
+// axios 컴포저블 함수 적용1
+// 에러 & 로딩 상태, 데이터* 가져오기
+// url(/posts/${props.id})전달
+// config와 options은 불필요 (단순 조회)
 const { error, loading, data: post } = useAxios(`/posts/${props.id}`);
 const { vAlert, vSuccess } = useAlert();
 
+// axios 컴포저블 함수 적용2
+// 에러 & 로딩 상태, 실행 함수* 가져오기
+// url(/posts/${props.id})과 config전달
+// config의 method는 delete로 설정
+// options으로는 즉시 실행은 안하고, 호출 성공 및 실패시 호출할 콜백함수 전달.
 const {
 	error: removeError,
 	loading: removeLoading,
@@ -107,7 +115,7 @@ const {
 	},
 );
 
-// 제거
+// '삭제' 버튼 클릭시 execute 함수를 통해 삭제 api 호출
 const remove = () => {
 	// 안티패턴 - 뎁스가 깊어지지 않도록(컨벤션에 따라 다름)
 	// 다른 예로 ! 를 === true 이런식으로 교체 가능 (훨씬 직관적이니까)

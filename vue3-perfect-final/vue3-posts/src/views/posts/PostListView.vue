@@ -84,8 +84,12 @@ const params = ref({
 });
 
 // axios 컴포저블 함수 적용
-// 데이터 조회 ('get'은 디폴트라 생략)
-// 데이터 조회필터(params) 전달
+// 에러 & 로딩 상태, 데이터* 가져오기
+// url(/posts)과 config전달
+// config의 method는 default로 생략(get)
+// 별도 options 불필요해서 생략  (단순 조회)
+
+// config의 params로 데이터 조회필터 전달
 // 가져온 data는 posts에 할당
 const {
 	response,

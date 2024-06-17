@@ -10,6 +10,9 @@
 				<button class="btn p-0" @click.stop="$emit('modal')">
 					<i class="bi bi-emoji-kiss-fill"></i>
 				</button>
+				<button class="btn p-0" @click.stop="$emit('preview')">
+					<i class="bi bi-app"></i>
+				</button>
 			</div>
 		</template>
 	</AppCard>
@@ -32,7 +35,7 @@ const props = defineProps({
 	},
 });
 
-defineEmits(['modal']);
+defineEmits(['modal', 'preview']);
 
 // provide로 제공한 라이브러리를 주입
 const dayjs = inject('dayjs');

@@ -26,6 +26,7 @@
 						:created-at="item.createdAt"
 						@click="goPage(item.id)"
 						@modal="openModal(item)"
+						@preview="selctPreview(item.id)"
 					></PostItem>
 				</template>
 			</AppGrid>
@@ -47,11 +48,11 @@
 			</PostModal>
 		</Teleport>
 
-		<template v-if="posts && posts.length > 0">
+		<template v-if="previewId">
 			<hr class="my-5" />
 			<AppCard>
 				<!-- router의 파라미터에 의존적이었지만 props: true 라우터 설정으로 속성을 전달할 수 있게 되었따 -->
-				<PostDetailView :id="1"></PostDetailView>
+				<PostDetailView :id="previewId"></PostDetailView>
 			</AppCard>
 		</template>
 	</div>
@@ -69,6 +70,11 @@ import AppError from '@/components/app/AppError.vue';
 import { useAxios } from '@/hooks/useAxios';
 
 const router = useRouter();
+
+const previewId = ref(null);
+const selctPreview = id => {
+	previewId.value = id;
+};
 
 // 데이터 조회 필터
 const params = ref({

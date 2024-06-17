@@ -42,7 +42,7 @@ export const useAxios = (url, config = {}, options = {}) => {
 		// 1차로 defaultsConfig를 가져와서 기본 method를 설정, 2차로 config를 가져와서 methods가 있으면 대체한다.
 		// config의 params의 반응형 객체 상태인 ref을 unref로 해제
 		loading.value = true;
-		axios(url, {
+		axios(unref(url), {
 			...defaultsConfig,
 			...config,
 			params: unref(params),
@@ -73,7 +73,7 @@ export const useAxios = (url, config = {}, options = {}) => {
 
 	// ○ execute 함수 호출
 	// config의 params가 반응형 데이터가 아닐 경우의 케이스를 처리한다.
-	if (isRef(params)) {
+	if (isRef(params) || isRef(url)) {
 		// 반응형 객체인 ref가 맞다면 watchEffect 등록
 		// 페이지 변경시 새로 execute가 호출된다. (반응형 데이터 변경 시 새로 호출)
 		// watch와 다르게 초기 1번 바로 실행함

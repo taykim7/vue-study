@@ -63,6 +63,7 @@ import AppLoading from '@/components/app/AppLoading.vue';
 import AppError from '@/components/app/AppError.vue';
 import { useAxios } from '@/hooks/useAxios';
 import { useAlert } from '@/composables/alert';
+import { computed } from 'vue';
 
 // props: true 라우터 설정으로 props를 받아옴
 // 기존에 route.params로 가져온 id는 주석처리
@@ -89,7 +90,9 @@ const router = useRouter();
 // 에러 & 로딩 상태, 데이터* 가져오기
 // url(/posts/${props.id})전달
 // config와 options은 불필요 (단순 조회)
-const { error, loading, data: post } = useAxios(`/posts/${props.id}`);
+
+const url = computed(() => `/posts/${props.id}`);
+const { error, loading, data: post } = useAxios(url);
 const { vAlert, vSuccess } = useAlert();
 
 // axios 컴포저블 함수 적용2

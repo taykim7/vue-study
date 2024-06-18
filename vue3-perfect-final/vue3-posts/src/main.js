@@ -10,6 +10,7 @@ import globalComponents from './plugins/global-components';
 // import focus from './directives/focus';
 import globalDirectives from './plugins/global-directives';
 import dayjs from './plugins/dayjs';
+import { createPinia } from 'pinia';
 
 const app = createApp(App);
 
@@ -25,9 +26,10 @@ app.use(dayjs);
 
 // 플러그인화한 여러 컴포넌트 전역 등록
 app.use(globalComponents);
-
 // 플러그인화한 여러 커스텀 디렉티브 전역 등록
 app.use(globalDirectives);
+// pinia 등록
+app.use(createPinia());
 
 app.mount('#app');
 import 'bootstrap/dist/js/bootstrap.js';

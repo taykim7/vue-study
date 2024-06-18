@@ -8,7 +8,7 @@
 	<div class="app-alert">
 		<TransitionGroup name="slide">
 			<div
-				v-for="({ message, type }, index) in items"
+				v-for="({ message, type }, index) in alerts"
 				:key="index"
 				class="alert"
 				:class="typeStyle(type)"
@@ -21,32 +21,8 @@
 </template>
 
 <script setup>
-// import { computed } from 'vue';
-
-// const props = defineProps({
-// 	show: {
-// 		type: Boolean,
-// 		default: false,
-// 	},
-// 	message: {
-// 		type: String,
-// 		required: true,
-// 	},
-// 	type: {
-// 		type: String,
-// 		default: 'error',
-// 		validator: value => ['success', 'error'].includes(value),
-// 	},
-// });
-
-// const typeStyle = computed(() =>
-// 	props.type === 'error' ? 'alert-danger' : 'alert-primary',
-// );
-
-defineProps({
-	items: Array,
-});
-
+import { useAlert } from '@/composables/alert';
+const { alerts } = useAlert();
 const typeStyle = type => (type === 'error' ? 'alert-danger' : 'alert-primary');
 </script>
 
@@ -56,27 +32,6 @@ const typeStyle = type => (type === 'error' ? 'alert-danger' : 'alert-primary');
 	top: 10px;
 	right: 10px;
 }
-/* ============ 나타날 때 ============ */
-/* .v-enter-from {
-	opacity: 0;
-}
-.v-enter-active {
-	transition: opacity 0.5s ease;
-}
-.v-enter-to {
-	opacity: 1;
-} */
-/* ============ 사라질 때 ============ */
-/* .v-leave-from {
-	opacity: 1;
-}
-.v-leave-active {
-	transition: opacity 0.5s ease;
-}
-.v-leave-to {
-	opacity: 0;
-} */
-
 /* ============ 나타날 때 (slide) ============ */
 .slide-enter-from {
 	opacity: 0;

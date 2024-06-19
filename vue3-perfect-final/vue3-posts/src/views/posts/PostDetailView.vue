@@ -19,10 +19,14 @@
 		<AppError v-if="removeError" :message="removeError.message"></AppError>
 		<div class="row g-2">
 			<div class="col-auto">
-				<button class="btn btn-outline-dark">이전글</button>
+				<button class="btn btn-outline-dark" @click="$router.push('/posts/1')">
+					이전글
+				</button>
 			</div>
 			<div class="col-auto">
-				<button class="btn btn-outline-dark">다음글</button>
+				<button class="btn btn-outline-dark" @click="$router.push('/posts/2')">
+					다음글
+				</button>
 			</div>
 			<div class="col-auto me-auto"></div>
 			<div class="col-auto">
@@ -56,6 +60,8 @@
 
 <script setup>
 import {
+	onBeforeRouteLeave,
+	onBeforeRouteUpdate,
 	// useRoute,
 	useRouter,
 } from 'vue-router';
@@ -131,6 +137,26 @@ const remove = () => {
 const goListPage = () => router.push({ name: 'PostList' });
 const goEditPage = () =>
 	router.push({ name: 'PostEdit', params: { id: props.id } });
+
+// 컴포넌트 내 가드
+// composition api
+// 경로가 변경되었을 경우
+onBeforeRouteUpdate(() => {
+	console.log('onBeforeRouteUpdate');
+});
+
+// 페이지를 떠날 경우
+onBeforeRouteLeave(() => {
+	console.log('onBeforeRouteLeave');
+});
+</script>
+<script>
+export default {
+	// options api
+	beforeRouteEnter() {
+		console.log('beforeRouteEnter');
+	},
+};
 </script>
 
 <style lang="scss" scoped></style>

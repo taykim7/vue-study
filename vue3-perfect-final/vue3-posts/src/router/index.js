@@ -78,8 +78,24 @@ const routes = [
 		path: '/my',
 		name: 'MyPage',
 		component: MyPage,
+
+		// 라우트 가드
+		// beforeEnter: (to, from) => {
+		// 	console.log('to: ', to);
+		// 	console.log('from: ', from);
+		// 	// return false
+		// 	return { name: 'Home' };
+		// },
+		beforeEnter: [removeQueryString],
 	},
 ];
+
+// 쿼리를 제거하는 메서드
+function removeQueryString(to) {
+	if (Object.keys(to.query).length > 0) {
+		return { path: to.path, query: {} };
+	}
+}
 
 const router = createRouter({
 	history: createWebHistory('/'),
@@ -87,19 +103,19 @@ const router = createRouter({
 	routes,
 });
 
-// 네비게이션 가드
-router.beforeEach((to, from) => {
-	// to: 이동할 페이지
-	// from: 이동하기 전 페이지
-	console.log(to);
-	console.log(from);
+// // 라우트 가드
+// router.beforeEach((to, from) => {
+// 	// to: 이동할 페이지
+// 	// from: 이동하기 전 페이지
+// 	console.log(to);
+// 	console.log(from);
 
-	// MyPage로 이동할 경우 이동이 안된다.
-	if (to.name === 'MyPage') {
-		// return false;
-		// return { name: 'Home' };
-		return '/posts';
-	}
-});
+// 	// MyPage로 이동할 경우 이동이 안된다.
+// 	if (to.name === 'MyPage') {
+// 		// return false;
+// 		// return { name: 'Home' };
+// 		return '/posts';
+// 	}
+// });
 
 export default router;

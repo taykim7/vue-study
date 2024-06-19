@@ -87,4 +87,19 @@ const router = createRouter({
 	routes,
 });
 
+// 네비게이션 가드
+router.beforeEach((to, from) => {
+	// to: 이동할 페이지
+	// from: 이동하기 전 페이지
+	console.log(to);
+	console.log(from);
+
+	// MyPage로 이동할 경우 이동이 안된다.
+	if (to.name === 'MyPage') {
+		// return false;
+		// return { name: 'Home' };
+		return '/posts';
+	}
+});
+
 export default router;

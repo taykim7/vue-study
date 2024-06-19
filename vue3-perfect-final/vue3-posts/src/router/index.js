@@ -15,6 +15,7 @@ import NestedView from '@/views/nested/NestedView.vue';
 import NestedOneView from '@/views/nested/NestedOneView.vue';
 import NestedTwoView from '@/views/nested/NestedTwoView.vue';
 import NestedHomeView from '@/views/nested/NestedHomeView.vue';
+import MyPage from '@/views/MyPage.vue';
 
 const routes = [
 	{
@@ -72,6 +73,11 @@ const routes = [
 		path: '/:pathMatch(.*)*',
 		name: 'NotFound',
 		component: NotFoundView,
+	},
+	{
+		path: '/my',
+		name: 'MyPage',
+		component: MyPage,
 	},
 ];
 

@@ -17,9 +17,14 @@
 		<!-- 데이터 조회 실패 -->
 		<AppError v-else-if="error" :message="error.message"></AppError>
 
+		<!-- 검색 결과 없음 -->
+		<template v-else-if="!isExist">
+			<p class="text-center py-5 text-muted">검색 결과 없음</p>
+		</template>
+
 		<!-- 데이터 조회 성공 -->
 		<template v-else>
-			<AppGrid :items="posts">
+			<AppGrid :items="posts" col-class="col-12 col-sm-6 col-md-4 col-lg-3">
 				<template v-slot="{ item }">
 					<PostItem
 						:title="item.title"
@@ -104,6 +109,9 @@ const {
 	error,
 	loading,
 } = useAxios('/posts', { params });
+
+// 검색 결과 유무 조회
+const isExist = computed(() => posts.value && posts.value.length > 0);
 
 // pagination - 페이지 수 = 전체개수/조회개수 (올림)
 const totalCount = computed(() => response.value.headers['x-total-count']);

@@ -2,7 +2,7 @@
 	<header>
 		<nav class="navbar navbar-expand-sm navbar-dark bg-primary">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="#">Gym coding</a>
+				<RouterLink class="navbar-brand" to="/">김테이</RouterLink>
 				<button
 					class="navbar-toggler"
 					type="button"

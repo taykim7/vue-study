@@ -6,6 +6,7 @@
 		<PostFilter
 			v-model:title="params.title_like"
 			v-model:limit="params._limit"
+			@update:limit="changeLimit"
 		></PostFilter>
 
 		<hr class="my-4" />
@@ -82,7 +83,7 @@ const params = ref({
 	_sort: 'createdAt',
 	_order: 'desc',
 	// (2) 조회 개수
-	_limit: 3,
+	_limit: 6,
 	// (3) 페이지
 	_page: 1,
 	// (4) 타이틀 필터
@@ -118,6 +119,12 @@ const goPage = id => {
 			id,
 		},
 	});
+};
+
+// 검색 필터 갯수 변경 시 초기화
+const changeLimit = value => {
+	params.value.value_limit = value;
+	params.value._page = 1;
 };
 
 // modal
